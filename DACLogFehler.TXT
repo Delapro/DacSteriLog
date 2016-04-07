@@ -1,0 +1,28 @@
+  DAC Universal                   
+Serien Nr:  601362
+Programm:   Universal/134?C/3min
+Deckel:     Standard            
+Zyklus:     14
+Dat.(T-M-J) 05-04-2016
+Zeit(H-M-S) 21:58:02
+--------------------------------
+Phase:             Uhrzeit: Erg:
+Start              21:58:34 Ok  
+Dichtheitspruefung 21:59:16 Ok  
+Innenreinigung     21:59:36 Ok  
+Schmierung         22:00:10 Ok  
+Aussenreinigung    22:01:16 FEHL
+Error code   97
+
+Prozessende        22:01:48 FEHL
+Bestaetigung       22:01:48 FEHL
+--------------------------------
+Zyklusende         22:01:49 FEHL
+--------------------------------
+
+
+            Fehler!
+
+Error code   97
+
+Abbruch Sterilisation
