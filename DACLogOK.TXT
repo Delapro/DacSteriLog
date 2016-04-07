@@ -1,0 +1,35 @@
+DAC Universal                   
+Serien Nr:  601362
+Programm:   Universal/134?C/3min
+Deckel:     Standard            
+Zyklus:     13
+Dat.(T-M-J) 16-03-2016
+Zeit(H-M-S) 00:53:20
+--------------------------------
+Phase:             Uhrzeit: Erg:
+Start              00:53:52 Ok  
+Dichtheitspruefung 00:54:27 Ok  
+Innenreinigung     00:54:47 Ok  
+Schmierung         00:55:21 Ok  
+Aussenreinigung    01:03:43 Ok  
+Back flush         01:04:52 Ok  
+Beginn Haltezeit   01:05:22 Ok  
+--------------------------------
+Uhrzeit:           ?C:      bar:
+01:05:30           135.3    3.18
+01:06:01           135.4    3.19
+01:06:31           135.4    3.19
+01:07:01           135.3    3.18
+01:07:31           135.3    3.18
+01:08:02           135.4    3.18
+01:08:32           135.4    3.21
+Maximum            135.4    3.21
+Minimum            135.3    3.17
+Dauer (m-s)        03-11
+--------------------------------
+Sterilisation      01:08:33 Ok  
+Ausblasen          Deaktiviert  
+Prozessende        01:10:01 Ok  
+Bestaetigung       01:12:08 Ok  
+--------------------------------
+Zyklusende         01:12:08 Ok  
