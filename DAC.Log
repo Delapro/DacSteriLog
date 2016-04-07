@@ -1,0 +1,447 @@
+13.03.2016 23:36:05
+------------
+13.03.2016 23:48:49
+------------
+14.03.2016 00:04:18
+System.Management.Automation.PSEventJob
+------------
+14.03.2016 00:09:26
+System.Management.Automation.PSEventJob
+------------
+14.03.2016 06:00:06
+System.Management.Automation.PSEventJob
+------------
+15.03.2016 06:00:05
+System.Management.Automation.PSEventJob
+------------
+15.03.2016 06:47:48
+System.Management.Automation.PSEventJob
+------------
+15.03.2016 06:59:32
+System.Management.Automation.PSEventJob
+System.IO.Ports.SerialPort.PortName konnte nicht geöffnet werden!!
+------------
+15.03.2016 07:05:57
+System.Management.Automation.PSEventJob
+COM1 konnte nicht geöffnet werden!!
+------------
+15.03.2016 22:03:25
+System.Management.Automation.PSEventJob
+COM3 erfolgreich geöffnet.
+===------------
+15.03.2016 22:05:35
+System.Management.Automation.PSEventJob
+COM3 erfolgreich geöffnet.
+===------------
+15.03.2016 23:41:59
+System.Management.Automation.PSEventJob
+COM3 erfolgreich geöffnet.
+DAC Universal                   
+Serien Nr:  601362
+Programm:   Universal/134?C/3min
+Deckel:     Standard            
+Zyklus:     13
+Dat.(T-M-J) 16-03-2016
+Zeit(H-M-S) 00:53:20
+--------------------------------
+Phase:             Uhrzeit: Erg:
+Start              00:53:52 Ok  
+Dichtheitspruefung 00:54:27 Ok  
+Innenreinigung     00:54:47 Ok  
+Schmierung         00:55:21 Ok  
+Aussenreinigung    01:03:43 Ok  
+Back flush         01:04:52 Ok  
+Beginn Haltezeit   01:05:22 Ok  
+--------------------------------
+Uhrzeit:           ?C:      bar:
+01:05:30           135.3    3.18
+01:06:01           135.4    3.19
+01:06:31           135.4    3.19
+01:07:01           135.3    3.18
+01:07:31           135.3    3.18
+01:08:02           135.4    3.18
+01:08:32           135.4    3.21
+Maximum            135.4    3.21
+Minimum            135.3    3.17
+Dauer (m-s)        03-11
+--------------------------------
+Sterilisation      01:08:33 Ok  
+Ausblasen          Deaktiviert  
+Prozessende        01:10:01 Ok  
+Bestaetigung       01:12:08 Ok  
+--------------------------------
+Zyklusende         01:12:08 Ok  
+===------------
+16.03.2016 06:00:05
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+===------------
+16.03.2016 07:35:14
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+16.03.2016 07:39:18
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+16.03.2016 07:45:59
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet.
+Eingangsschleife verlassen
+Es wurde erkannt, dass der Port am 03/16/2016 19:39:36 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+17.03.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet.
+Eingangsschleife verlassen
+Es wurde erkannt, dass der Port am 03/17/2016 19:46:12 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+18.03.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet.
+Eingangsschleife verlassen
+Es wurde erkannt, dass der Port am 03/18/2016 12:22:01 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+19.03.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+20.03.2016 06:00:05
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet.
+Eingangsschleife verlassen
+Es wurde erkannt, dass der Port am 03/20/2016 22:41:35 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+21.03.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet.
+Eingangsschleife verlassen
+Es wurde erkannt, dass der Port am 03/21/2016 21:50:54 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+22.03.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet.
+Eingangsschleife verlassen
+Es wurde erkannt, dass der Port am 03/22/2016 23:23:11 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+23.03.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet.
+Eingangsschleife verlassen
+Es wurde erkannt, dass der Port am 03/23/2016 19:36:07 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet.
+Es wurde erkannt, dass der Port am 03/23/2016 22:28:26 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+24.03.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet.
+Eingangsschleife verlassen
+Es wurde erkannt, dass der Port am 03/24/2016 20:03:53 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+25.03.2016 06:00:05
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+26.03.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+28.03.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet.
+Eingangsschleife verlassen
+Es wurde erkannt, dass der Port am 03/28/2016 16:40:42 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 03/28/2016 21:25:47.
+Es wurde erkannt, dass der Port am 03/28/2016 22:20:07 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+29.03.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet.
+Eingangsschleife verlassen
+Es wurde erkannt, dass der Port am 03/29/2016 22:48:03 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+30.03.2016 06:00:05
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 03/30/2016 07:50:08.
+Eingangsschleife verlassen
+Es wurde erkannt, dass der Port am 03/30/2016 22:19:59 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 03/30/2016 22:21:59.
+Es wurde erkannt, dass der Port am 03/30/2016 22:27:19 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+31.03.2016 06:00:05
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 03/31/2016 07:46:08.
+Eingangsschleife verlassen
+Eingangsschleife jetzt kommt die Dauerwarteschlange...
+Es wurde erkannt, dass der Port am 03/31/2016 20:39:53 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+01.04.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 04/01/2016 07:46:09.
+Eingangsschleife verlassen
+Eingangsschleife jetzt kommt die Dauerwarteschlange...
+Es wurde erkannt, dass der Port am 04/01/2016 21:36:00 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+02.04.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 04/02/2016 14:54:15.
+Eingangsschleife verlassen
+Eingangsschleife jetzt kommt die Dauerwarteschlange...
+Es wurde erkannt, dass der Port am 04/02/2016 20:30:28 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+03.04.2016 06:00:05
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+04.04.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 04/04/2016 07:39:08.
+Eingangsschleife verlassen
+Eingangsschleife jetzt kommt die Dauerwarteschlange...
+Es wurde erkannt, dass der Port am 04/04/2016 22:19:52 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+05.04.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 04/05/2016 10:53:11.
+Eingangsschleife verlassen
+Eingangsschleife jetzt kommt die Dauerwarteschlange...
+  DAC Universal                   
+Serien Nr:  601362
+Programm:   Universal/134?C/3min
+Deckel:     Standard            
+Zyklus:     14
+Dat.(T-M-J) 05-04-2016
+Zeit(H-M-S) 21:58:02
+--------------------------------
+Phase:             Uhrzeit: Erg:
+Start              21:58:34 Ok  
+Dichtheitspruefung 21:59:16 Ok  
+Innenreinigung     21:59:36 Ok  
+Schmierung         22:00:10 Ok  
+Aussenreinigung    22:01:16 FEHL
+Error code   97
+
+Prozessende        22:01:48 FEHL
+Bestaetigung       22:01:48 FEHL
+--------------------------------
+Zyklusende         22:01:49 FEHL
+--------------------------------
+
+
+            Fehler!
+
+Error code   97
+
+Abbruch Sterilisation
+
+
+
+DAC Universal                   
+Serien Nr:  601362
+Programm:   Universal/134?C/3min
+Deckel:     Standard            
+Zyklus:     15
+Dat.(T-M-J) 05-04-2016
+Zeit(H-M-S) 22:06:37
+--------------------------------
+Phase:             Uhrzeit: Erg:
+Start              22:07:10 Ok  
+Dichtheitspruefung 22:07:46 Ok  
+Innenreinigung     22:08:06 Ok  
+Schmierung         22:08:40 Ok  
+Aussenreinigung    22:17:11 Ok  
+Back flush         22:18:22 Ok  
+Beginn Haltezeit   22:18:52 Ok  
+--------------------------------
+Uhrzeit:           ?C:      bar:
+22:19:01           135.4    3.18
+22:19:31           135.4    3.18
+22:20:01           135.3    3.18
+22:20:32           135.3    3.18
+22:21:02           135.3    3.19
+22:21:32           135.3    3.18
+22:22:02           135.3    3.20
+Maximum            135.4    3.21
+Minimum            135.3    3.17
+Dauer (m-s)        03-11
+--------------------------------
+Sterilisation      22:22:04 Ok  
+Ausblasen          Deaktiviert  
+Prozessende        22:23:38 Ok  
+Bestaetigung       22:36:44 Ok  
+--------------------------------
+Zyklusende         22:36:44 Ok  
+Es wurde erkannt, dass der Port am 04/06/2016 00:25:02 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+06.04.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 04/06/2016 07:51:09.
+Eingangsschleife verlassen
+Eingangsschleife jetzt kommt die Dauerwarteschlange...
+Es wurde erkannt, dass der Port am 04/06/2016 19:30:41 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 04/06/2016 21:52:44.
+DAC Universal                   
+Serien Nr:  601362
+Programm:   Universal/134?C/3min
+Deckel:     Standard            
+Zyklus:     16
+Dat.(T-M-J) 06-04-2016
+Zeit(H-M-S) 22:30:24
+--------------------------------
+Phase:             Uhrzeit: Erg:
+Start              22:30:56 Ok  
+Dichtheitspruefung 22:31:31 Ok  
+Innenreinigung     22:31:51 Ok  
+Schmierung         22:32:25 Ok  
+Aussenreinigung    22:40:56 Ok  
+Back flush         22:42:06 Ok  
+Beginn Haltezeit   22:42:36 Ok  
+--------------------------------
+Uhrzeit:           ?C:      bar:
+22:42:45           135.4    3.17
+22:43:15           135.3    3.17
+22:43:45           135.3    3.18
+22:44:16           135.3    3.18
+22:44:46           135.3    3.18
+22:45:16           135.3    3.18
+22:45:47           135.3    3.18
+Maximum            135.4    3.21
+Minimum            135.3    3.17
+Dauer (m-s)        03-12
+--------------------------------
+Sterilisation      22:45:48 Ok  
+Ausblasen          Deaktiviert  
+Prozessende        22:47:20 Ok  
+Bestaetigung       22:53:00 Ok  
+--------------------------------
+Zyklusende         22:53:01 Ok  
+Es wurde erkannt, dass der Port am 04/06/2016 23:43:00 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+===------------
+07.04.2016 06:00:06
+System.Management.Automation.PSEventJob
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 04/07/2016 07:31:08.
+Eingangsschleife verlassen
+Eingangsschleife jetzt kommt die Dauerwarteschlange...
+Es wurde erkannt, dass der Port am 04/07/2016 07:44:22 unerwartet geschlossen wurde!
+COM3 konnte nicht geöffnet werden!!
+Es wird nun versucht alle 60 Sekunden den Port zu öffnen...
+COM3 erfolgreich geöffnet 04/07/2016 07:45:23.
+DAC Universal                   
+Serien Nr:  601362
+Programm:   Universal/134?C/3min
+Deckel:     Standard            
+Zyklus:     17
+Dat.(T-M-J) 07-04-2016
+Zeit(H-M-S) 20:32:59
+--------------------------------
+Phase:             Uhrzeit: Erg:
+Start              20:33:31 Ok  
+Dichtheitspruefung 20:34:06 Ok  
+Innenreinigung     20:34:26 Ok  
+Schmierung         20:35:00 Ok  
+Aussenreinigung    20:43:34 Ok  
+Back flush         20:44:46 Ok  
+Beginn Haltezeit   20:45:16 Ok  
+--------------------------------
+Uhrzeit:           ?C:      bar:
+20:45:25           135.3    3.17
+20:45:55           135.3    3.20
+20:46:25           135.3    3.18
+20:46:55           135.3    3.18
+20:47:26           135.3    3.18
+20:47:56           135.3    3.18
+20:48:26           135.3    3.18
+Maximum            135.4    3.21
+Minimum            135.3    3.17
+Dauer (m-s)        03-11
+--------------------------------
+Sterilisation      20:48:28 Ok  
+Ausblasen          Deaktiviert  
+Prozessende        20:50:01 Ok  
+Bestaetigung       21:11:31 Ok  
+--------------------------------
+Zyklusende         21:11:32 Ok  
