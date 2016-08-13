@@ -43,11 +43,15 @@ Function Test-DACZyklenChronologie {
 
     If ($Zyklen.Count -gt 1) {
         $TestZyklus = $Zyklen[0].Zyklus
+        Write-Verbose "Startzyklus: $TestZyklus"
         for ($i = 1; $i -lt $Zyklen.Count; $i++) {
-            If (($TestZyklus +1) -ne ($Zyklen[$i].Zyklus) ) {
+            $NaechsterZyklus = $Zyklen[$i].Zyklus
+            If (($TestZyklus +1) -ne $NaechsterZyklus ) {
+                Write-Verbose "unerlaubter Zyklensprung: $TestZyklus auf $NaechsterZyklus"
                 $Chronologisch = $False
                 break
             }
+            $TestZyklus = $NaechsterZyklus
         }
     }
 
@@ -65,7 +69,7 @@ Function Analyze-DACZyklus {
                     Seriennummer=$Zyklus[1].Substring(12);
                     Programm=$Zyklus[2].Substring(12);
                     Deckel=$Zyklus[3].Substring(12);
-                    Zyklus=$Zyklus[4].Substring(12);
+                    Zyklus=[int]$Zyklus[4].Substring(12);
                     Datum=Get-Date "$($Zyklus[5].Substring(12)) $($Zyklus[6].Substring(11))";
                     Phasen="";
                 }
@@ -117,4 +121,5 @@ Function Get-DACBlockPos {
 
 }
 
-Analyze-DACLogFile -Path .\DAC.LOG
+$z = Analyze-DACLogFile -Path .\DAC.LOG
+Test-DACZyklenChronologie $z
