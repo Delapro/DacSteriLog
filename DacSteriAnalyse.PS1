@@ -40,11 +40,11 @@ Function Analyze-DACZyklus {
     )
 
     $DACZyklus = [PSCustomObject]@{
-                    Seriennummer=$Zyklus[1].Substring(11);
-                    Programm=$Zyklus[2].Substring(11);
-                    Deckel=$Zyklus[3].Substring(11);
-                    Zyklus=$Zyklus[4].Substring(11);
-                    Datum=Get-Date "$($Zyklus[5].Substring(11)) $($Zyklus[6].Substring(11))";
+                    Seriennummer=$Zyklus[1].Substring(12);
+                    Programm=$Zyklus[2].Substring(12);
+                    Deckel=$Zyklus[3].Substring(12);
+                    Zyklus=$Zyklus[4].Substring(12);
+                    Datum=Get-Date "$($Zyklus[5].Substring(12)) $($Zyklus[6].Substring(11))";
                     Phasen="";
                 }
     $DACZyklus.PSTypenames.Insert(0, "DACZyklus")
