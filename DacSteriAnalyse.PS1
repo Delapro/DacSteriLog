@@ -64,6 +64,18 @@ Function Analyze-DACZyklus {
         [String[]]$Zyklus
     )
 
+    # Prüfen ob Zyklusende ordentlich da steht
+    # Beispiel: Zyklusende         01:12:08 Ok
+    # alles andere wird als fehlerhaft gewertet
+    If ($Zyklus -match "Zyklusende\s+(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d) Ok") {
+        $Fehlerhaft = $False
+        $Fehler = ""
+    } else {
+        $Fehlerhaft = $true
+        # möglichst viele Fehlerinformationen ermitteln
+        $Fehler = ""
+    }
+
     $DACZyklus = [PSCustomObject]@{
                     PSTypeName="DAC.Zyklus"
                     Seriennummer=$Zyklus[1].Substring(12);
@@ -72,7 +84,11 @@ Function Analyze-DACZyklus {
                     Zyklus=[int]$Zyklus[4].Substring(12);
                     Datum=Get-Date "$($Zyklus[5].Substring(12)) $($Zyklus[6].Substring(11))";
                     Phasen="";
+                    Fehlerhaft=$Fehlerhaft;
+                    Fehler=$Fehler;
                 }
+    $DACZyklus | Add-Member -Type ScriptProperty -Name Wochentag -Value {(Get-Culture).DateTimeFormat.DayNames[$this.Datum.DayOfWeek.value__]}
+
     $DACZyklus
 }
 
