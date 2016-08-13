@@ -33,6 +33,27 @@ Function Analyze-DACLogFile {
 
 }
 
+Function Test-DACZyklenChronologie {
+    [CmdletBinding()]
+    Param (
+        [PSTypeName('DAC.Zyklus')]$Zyklen
+    )
+    
+    $Chronologisch = $True
+
+    If ($Zyklen.Count -gt 1) {
+        $TestZyklus = $Zyklen[0].Zyklus
+        for ($i = 1; $i -lt $Zyklen.Count; $i++) {
+            If (($TestZyklus +1) -ne ($Zyklen[$i].Zyklus) ) {
+                $Chronologisch = $False
+                break
+            }
+        }
+    }
+
+    $Chronologisch
+}
+
 Function Analyze-DACZyklus {
     [CmdletBinding()]
     Param (
@@ -40,6 +61,7 @@ Function Analyze-DACZyklus {
     )
 
     $DACZyklus = [PSCustomObject]@{
+                    PSTypeName="DAC.Zyklus"
                     Seriennummer=$Zyklus[1].Substring(12);
                     Programm=$Zyklus[2].Substring(12);
                     Deckel=$Zyklus[3].Substring(12);
@@ -47,7 +69,6 @@ Function Analyze-DACZyklus {
                     Datum=Get-Date "$($Zyklus[5].Substring(12)) $($Zyklus[6].Substring(11))";
                     Phasen="";
                 }
-    $DACZyklus.PSTypenames.Insert(0, "DACZyklus")
     $DACZyklus
 }
 
