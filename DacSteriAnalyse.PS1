@@ -89,6 +89,7 @@ Function Analyze-DACZyklus {
                     Phasen="";
                     Fehlerhaft=$Fehlerhaft;
                     Fehler=$Fehler;
+                    RawContent=$Zyklus | Out-String
                 }
     $DACZyklus | Add-Member -Type ScriptProperty -Name Wochentag -Value {(Get-Culture).DateTimeFormat.DayNames[$this.Datum.DayOfWeek.value__]}
 
