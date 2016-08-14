@@ -36,7 +36,8 @@ Function Analyze-DACLogFile {
 Function Test-DACZyklenChronologie {
     [CmdletBinding()]
     Param (
-        [PSTypeName('DAC.Zyklus')]$Zyklen
+        [PSTypeName('DAC.Zyklus')]$Zyklen,
+        [Switch]$Continue
     )
     
     $Chronologisch = $True
@@ -49,7 +50,9 @@ Function Test-DACZyklenChronologie {
             If (($TestZyklus +1) -ne $NaechsterZyklus ) {
                 Write-Verbose "unerlaubter Zyklensprung von $($NaechsterZyklus - $TestZyklus) Zyklen: $TestZyklus auf $NaechsterZyklus"
                 $Chronologisch = $False
-                break
+                If (-Not $Continue) {
+                    break
+                }
             }
             $TestZyklus = $NaechsterZyklus
         }

@@ -11,6 +11,52 @@
 # HHH sind einfach Zahlen die hochgezählt werden und bei erreichen
 # von 9 mit A-Z weitergeführt werden.
 
+<#
+.SYNOPSIS
+    Erhöht einen Zeichenkettencounterwert um eins
+.DESCRIPTION
+    Get-NextCounter erhöht einen Zeichenkettencounter um eins. Die Anzahl
+    der Stellen ist per Vorgabe auf drei Zeichen beschränkt und kann mittels
+    des Parameters $Width verändert werden. 
+    Das Besondere an Get-NextCounter ist die Verwendung von Zahlen und
+    Buchstaben. Der Bereich umfasst 0-9 und A-Z wobei nach 9 auf A erhöht
+    wird.
+.PARAMETER StartCounter
+    Anfangswert der hochgezählt werden soll
+.PARAMETER Width
+    Breite des Counterwerts
+.EXAMPLE
+    Get-NextCounter
+    000
+
+    Dieser Aufruf erzeugt einen Counterwert. Die Anzahl der Stellen ist 
+    per Vorgabe auf drei Zeichen beschränkt.
+.EXAMPLE
+    Get-NextCounter -StartCounter "001"
+    002
+
+    Dieser Aufruf erhöht den übergebenen Wert.
+.EXAMPLE
+    Get-NextCounter -StartCounter "00Z"
+    010
+
+    Bei Z findet ein Übertrag statt. Der vorstehende Wert wird um 1 erhöht.
+    Der ursprüngliche Wert wird auf 0 gesetzt.
+.EXAMPLE
+    Get-NextCounter -StartCounter "ZZZ"
+    Overflow
+    In C:\Sample\DAC\DacSteriLog\MelaViewProvider.PS1:48 Zeichen:21
+    +                     Throw "Overflow"
+    +                     ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Overflow:String) [], RuntimeException
+    + FullyQualifiedErrorId : Overflow
+    
+    Wenn die maximale Counterzahl erreicht wird, dann erfolgt eine Fehlermeldung.
+.INPUTS
+    Inputs (if any)
+.OUTPUTS
+    Output (if any)
+#>
 Function Get-NextCounter {
     [CmdletBinding()]
     Param(
