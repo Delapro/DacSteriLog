@@ -20,6 +20,13 @@ $Zyklusende_EN = "Cycle end"
 $FehlerID_EN = "FAIL"
 $OKID_EN = "OK"
 
+# Französisch
+# TODO:
+$DACUniversal_FR = "DAC Universal"
+$Zyklusende_FR = "Cycle end"
+$FehlerID_FR = "FAIL"
+$OKID_FR = "OK"
+
 # Deutsch ist Vorgabe
 $DACUniversal = $DACUniversal_DE
 $Zyklusende = $Zyklusende_DE
@@ -30,22 +37,31 @@ Function Set-LogFileLanguage {
     [CmdletBinding()]
     Param(
         [Switch]$Deutsch,
-        [Switch]$English
+        [Switch]$English,
+        [Switch]$Francais
     )
 
     If ($Deutsch) {
-        $DACUniversal = $DACUniversal_DE
-        $Zyklusende = $Zyklusende_DE
-        $FehlerID = $FehlerID_DE
-        $OKID = $OKID_DE        
+        $Script:DACUniversal = $DACUniversal_DE
+        $Script:Zyklusende = $Zyklusende_DE
+        $Script:FehlerID = $FehlerID_DE
+        $Script:OKID = $OKID_DE
     }
 
     If ($English) {
-        $DACUniversal = $DACUniversal_EN
-        $Zyklusende = $Zyklusende_EN
-        $FehlerID = $FehlerID_EN
-        $OKID = $OKID_EN        
+        $Script:DACUniversal = $DACUniversal_EN
+        $Script:Zyklusende = $Zyklusende_EN
+        $Script:FehlerID = $FehlerID_EN
+        $Script:OKID = $OKID_EN
     }
+
+    If ($Francais) {
+        $Script:DACUniversal = $DACUniversal_FR
+        $Script:Zyklusende = $Zyklusende_FR
+        $Script:FehlerID = $FehlerID_FR
+        $Script:OKID = $OKID_FR
+    }
+
 }
 
 Function Analyze-DACLogFile {
@@ -165,6 +181,9 @@ Function Get-DACBlockPos {
                 $Index = $Index -1
                 $end = $Index
             }
+        } elseif (($Start -ne -1) -and ($Zeile -match "===----")) {
+            Write-Verbose "nächsten Tageseintrag erkannt, Zeile: $Index" 
+            $end = $Index
         } else {
             If ($Zeile -match $Zyklusende -and $Start -ne -1) {
                 Write-Verbose "Zyklusende erkannt, prüfen ob kein Fehler"
