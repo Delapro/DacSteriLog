@@ -3,7 +3,48 @@
 # welche über ein Powershell Script hinzugefügt werden.
 #
 
+# Deutsch
+$DACUniversal_DE = "DAC Universal"
+$Zyklusende_DE = "Zyklusende"
+$FehlerID_DE = "FEHL"
+$OKID_DE = "Ok"
+
+# Englisch
+$DACUniversal_EN = "DAC Universal"
+$Zyklusende_EN = "Cycle end"
+$FehlerID_EN = "FAIL"
+$OKID_EN = "OK"
+
+# Deutsch ist Vorgabe
+$DACUniversal = $DACUniversal_DE
+$Zyklusende = $Zyklusende_DE
+$FehlerID = $FehlerID_DE
+$OKID = $OKID_DE
+
+Function Set-LogFileLanguage {
+    [CmdletBinding()]
+    Param(
+        [Switch]$Deutsch,
+        [Switch]$English
+    )
+
+    If ($Deutsch) {
+        $DACUniversal = $DACUniversal_DE
+        $Zyklusende = $Zyklusende_DE
+        $FehlerID = $FehlerID_DE
+        $OKID = $OKID_DE        
+    }
+
+    If ($English) {
+        $DACUniversal = $DACUniversal_EN
+        $Zyklusende = $Zyklusende_EN
+        $FehlerID = $FehlerID_EN
+        $OKID = $OKID_EN        
+    }
+}
+
 Function Analyze-DACLogFile {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "", Scope="Function")]
     [CmdletBinding()]
     Param (
 		[Parameter(Mandatory=$true)]
@@ -62,6 +103,7 @@ Function Test-DACZyklenChronologie {
 }
 
 Function Analyze-DACZyklus {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "", Scope="Function")]
     [CmdletBinding()]
     Param (
         [String[]]$Zyklus
@@ -70,7 +112,7 @@ Function Analyze-DACZyklus {
     # Prüfen ob Zyklusende ordentlich da steht
     # Beispiel: Zyklusende         01:12:08 Ok
     # alles andere wird als fehlerhaft gewertet
-    If ($Zyklus -match "Zyklusende\s+(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d) Ok") {
+    If ($Zyklus -match "$Zyklusende\s+(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d) $OKID") {
         $Fehlerhaft = $False
         $Fehler = ""
     } else {
@@ -119,9 +161,9 @@ Function Get-DACBlockPos {
                 $end = $Index
             }
         } else {
-            If ($Zeile -match "Zyklusende" -and $Start -ne -1) {
+            If ($Zeile -match $Zyklusende -and $Start -ne -1) {
                 Write-Verbose "Zyklusende erkannt, prüfen ob kein Fehler"
-                If (-not ($Zeile -match "FEHL") ) {
+                If (-not ($Zeile -match $FehlerID) ) {
                     Write-Verbose "Zyklusende erkannt, Zeile: $Index"
                     If ($Start -eq -1) {
                         $start = $Index
