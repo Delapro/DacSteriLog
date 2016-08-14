@@ -21,32 +21,34 @@ Function Get-NextCounter {
     If (-not ($StartCounter)) {
         $StartCounter = "0" * $Width
         Write-Verbose "Start mit $StartCounter"
-    }
-
-    $Pos = $StartCounter.Length -1
-    while ($true) {
-        $Zeichen = $StartCounter[$Pos]
-        Write-Verbose "Pos: $Pos, ermitteltes Zeichen: '$Zeichen'"
-        If ($Zeichen -lt "Z") {
-            If ($Zeichen -eq "9") {
-                $NeuesZeichen = "A"
-            } elseif ($Zeichen -eq "0") {
-                $NeuesZeichen = "1"
+    } else {
+        $StartCounter = $StartCounter.ToUpper()
+        $Pos = $StartCounter.Length -1
+        while ($true) {
+            $Zeichen = $StartCounter[$Pos]
+            Write-Verbose "Pos: $Pos, ermitteltes Zeichen: '$Zeichen'"
+            If ($Zeichen -lt "Z") {
+                # alles kleiner als Z kann in der direkten Position geändert werden
+                If ($Zeichen -eq "9") {
+                    # Sonderfall 9 wird zu A
+                    $NeuesZeichen = "A"
+                } else {
+                    $NeuesZeichen = [char](([int][char]$Zeichen)+1)
+                }
+                $StartCounter = $StartCounter.Remove($Pos, 1).Insert($Pos, $NeuesZeichen)
+                Write-Verbose "Neues Zeichen: '$NeuesZeichen', neuer Counter: '$StartCounter'"
+                break
             } else {
-                $NeuesZeichen = [char](([int]$Zeichen)+1)
-            }
-            $StartCounter = $StartCounter.Remove($Pos, 1).Insert($Pos, $NeuesZeichen)
-            Write-Verbose "Neues Zeichen: '$NeuesZeichen', neuer Counter: '$StartCounter'"
-            break
-        } else {
-            # Überlauf
-            If ($Pos -gt 0) {
-                $StartCounter = $StartCounter.Remove($Pos, 1).Insert($Pos, "0")
-                $Pos--
-            } else {
-                Throw "Overflow"
-            }
-        }         
+                # Überlauf, also das nächste Zeichen links vom aktuellen erhöhen
+                If ($Pos -gt 0) {
+                    $StartCounter = $StartCounter.Remove($Pos, 1).Insert($Pos, "0")
+                    $Pos--
+                } else {
+                    # es gibt kein weiteres linkes Zeichen, also Ende
+                    Throw "Overflow"
+                }
+            }         
+        }
     }
 
     $StartCounter
