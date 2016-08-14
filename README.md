@@ -1,2 +1,2 @@
 # DacSteriLog
-Powershellscript um LOG-Dateien vom DAC Sterilisator auswerten zu können
+Powershellscript um LOG-Dateien vom DAC Universal Sterilisator auswerten zu können.
