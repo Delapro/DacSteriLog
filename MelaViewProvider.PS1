@@ -53,3 +53,44 @@ Function Get-NextCounter {
 
     $StartCounter
 }
+
+Function New-Filename {
+    [CmdletBinding()]
+    Param(
+        [string]$BasePath,
+        [string]$Counter,
+        [string]$Device,
+        [DateTime]$Date,
+        [bool]$Successful
+    )
+    
+    If (Test-Path $BasePath) {
+        $dateDir = Get-Date $Date -Format "MM_yyyy"
+        $Path = Join-Path $BasePath $dateDir
+        # Monatsverzeichnis anlegen, wenn nicht vorhanden:
+        If (-Not (Test-Path ($path))) {
+            New-Item -Path $Path -ItemType Directory | Out-Null
+        }
+        If ($Successful) {
+            $ext = ".PRO"
+        } else {
+            $ext = ".STR"
+        }
+        $File = Join-Path $Path "$Device$Counter$ext"
+        Write-Verbose "Anzulegender Dateiname: $File"
+        $FileInfo = New-Item $File
+    } else {
+        Throw "$BasePath ist nicht vorhanden!"
+    }
+
+    $FileInfo
+}
+
+Function Write-LogFile {
+    [CmdletBinding()]
+    Param(
+        [string]$Filename,
+        [string]$LogData
+    )
+    
+}
