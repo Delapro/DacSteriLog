@@ -3,6 +3,11 @@
 # welche über ein Powershell Script hinzugefügt werden.
 #
 
+# Hier sind die Regeln für Scriptanalyzer zu finden:
+# https://github.com/PowerShell/PSScriptAnalyzer/search?utf8=%E2%9C%93&q=unapproved+verb&type=Code
+# man bindet folgende Zeile ein und setzt die Regel ein:
+# [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "", Scope="Function")]
+
 # Deutsch
 $DACUniversal_DE = "DAC Universal"
 $Zyklusende_DE = "Zyklusende"
