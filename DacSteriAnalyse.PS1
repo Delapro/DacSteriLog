@@ -112,6 +112,8 @@ Function Get-DACBlockPos {
             If ($Start -eq -1) {
                 $start = $Index
             } else {
+                # -2 ist, wichtig, sonst werden nachfolgende Blöcke nicht mehr erkannt!
+                $Index = $Index -1
                 $end = $Index
             }
         } else {
