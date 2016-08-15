@@ -110,7 +110,7 @@ Function Test-DACZyklenChronologie {
         for ($i = 1; $i -lt $Zyklen.Count; $i++) {
             $NaechsterZyklus = $Zyklen[$i].Zyklus
             If (($TestZyklus +1) -ne $NaechsterZyklus ) {
-                Write-Verbose "unerlaubter Zyklensprung von $($NaechsterZyklus - $TestZyklus) Zyklen: $TestZyklus auf $NaechsterZyklus"
+                Write-Verbose "unerlaubter Zyklensprung von $($NaechsterZyklus - $TestZyklus -1) Zyklen: $TestZyklus auf $NaechsterZyklus"
                 $Chronologisch = $False
                 If (-Not $Continue) {
                     break
