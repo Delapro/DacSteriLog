@@ -100,6 +100,28 @@ Function Get-NextCounter {
     $StartCounter
 }
 
+<#
+Ermittelt vom Basispfad ausgehend das neueste Monatsverzeichnis.
+In diesem wird die neueste Datei ermittelt und zurückgegeben.
+#>
+Function Get-LastFilename {
+    [CmdletBinding()]
+    Param(
+        [String]$BasePath
+    )
+    If (Test-Path $BasePath) {
+        # neuestes Datum zuerst
+        $Dirs = DIR ??_20?? | sort {Get-Date $_.Name.Replace("_",".")} -Descending
+        If ($Dirs) {
+            $Path = Join-Path $BasePath $Dirs[0].Name
+            If (-Not (Test-Path ($path))) {
+                $Files = Get-Item *.PRO, *.STR | sort Name -Descending
+                $Files[0]
+            }
+        }
+    }
+}
+
 Function New-Filename {
     [CmdletBinding()]
     Param(
@@ -136,7 +158,8 @@ Function Write-LogFile {
     [CmdletBinding()]
     Param(
         [string]$Filename,
-        [string]$LogData
+        [PSTypeName("DAC.Zyklus")]$Zyklus
     )
-    
+    Write-Verbose "Schreibe $($Zyklus.Zyklus) in $Filename"
+    $Zyklus.RawData | Set-Content -Path $Filename -Force -Encoding Ascii
 }
