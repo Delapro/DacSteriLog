@@ -113,7 +113,7 @@ Function Get-LastFilename {
         Write-Verbose "$BasePath existiert"
         $Path = Join-Path $BasePath "??_20??"
         # neuestes Datum zuerst
-        $Dirs = DIR ??_20?? | sort {Get-Date $_.Name.Replace("_",".")} -Descending
+        $Dirs = DIR $Path | sort {Get-Date $_.Name.Replace("_",".")} -Descending
         Write-Verbose "Bei der Suche nach $Path $($Dirs.Length) Einträge gefunden"
         If ($Dirs) {
             $Path = Join-Path $BasePath $Dirs[0].Name
