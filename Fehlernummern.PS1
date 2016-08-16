@@ -152,14 +152,16 @@ destilliertes Wasser (Wasserleitfähigkeit < 3,0 µS/cm) in den Wassertank.
 Wenn der Fehler wiederholt auftritt, wenden Sie sich bitte an Ihren
 autorisierten Händler.
 85 Der Drucksensor ist defekt. Wenden Sie sich bitte an Ihren autorisierten Händler.
-86 Der Sicherheitsring wurde beim
-Schließen des Deckels aktiviert
-Drücken Sie zum Zurücksetzen die „Clear“-Taste.
-Stellen Sie sicher, dass der Deckel korrekt in der Deckelhalterung platziert
-ist.
+#>
+$FehlerBeschreibungen += New-Fehlerbeschreibung -CodeNr 86 -Beschreibung @"
+Der Sicherheitsring wurde beim Schließen des Deckels aktiviert Drücken Sie zum Zurücksetzen die „Clear“-Taste.
+"@ -Fehlerbehebung @"
+Stellen Sie sicher, dass der Deckel korrekt in der Deckelhalterung platziert ist.
 Starten Sie den Zyklus neu.
-Wenn der Fehler wiederholt auftritt, wenden Sie sich bitte an Ihren
-autorisierten Händler.
+Wenn der Fehler wiederholt auftritt, wenden Sie sich bitte an Ihren autorisierten Händler.
+"@
+
+<#
 87 Der Sicherheitsring ist defekt. Wenden Sie sich bitte an Ihren autorisierten Händler.
 88 Zu geringer Dampfdruck
 während der Sterilisation.
