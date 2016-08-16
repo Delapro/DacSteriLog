@@ -110,12 +110,17 @@ Function Get-LastFilename {
         [String]$BasePath
     )
     If (Test-Path $BasePath) {
+        Write-Verbose "$BasePath existiert"
+        $Path = Join-Path $BasePath "??_20??"
         # neuestes Datum zuerst
         $Dirs = DIR ??_20?? | sort {Get-Date $_.Name.Replace("_",".")} -Descending
+        Write-Verbose "Bei der Suche nach $Path $($Dirs.Length) Einträge gefunden"
         If ($Dirs) {
             $Path = Join-Path $BasePath $Dirs[0].Name
+            Write-Verbose "neuester Pfad: $Path"
             If (-Not (Test-Path ($path))) {
                 $Files = Get-Item *.PRO, *.STR | sort Name -Descending
+                Write-Verbose "$($Files.Length) Dateien gefunden, neueste: ($Files[0].Name)"
                 $Files[0]
             }
         }
