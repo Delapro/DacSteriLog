@@ -120,7 +120,7 @@ Function Get-LastFilename {
             Write-Verbose "neuester Pfad: $Path"
             If (Test-Path ($path)) {
                 $Files = Get-ChildItem -Path "$($Path)\*" -Include *.PRO, *.STR | sort Name -Descending
-                Write-Verbose "$($Files.Length) Dateien gefunden, neueste: $($Files[0].Name)"
+                Write-Verbose "$($Files.Size) Dateien gefunden, neueste: $($Files[0].Name)"
                 $Files[0]
             }
         }
