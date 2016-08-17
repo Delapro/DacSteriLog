@@ -210,5 +210,18 @@ Function Get-DACBlockPos {
 
 }
 
+Function Write-DACLog {
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory = $true,Position = 0,valueFromPipeline=$true)]
+        [PSTypeName("DAC.Zyklus")]$Zyklen,
+        [Parameter(Mandatory = $true,Position = 1)]
+        [String]$Path
+    )
+    foreach ($Zyklus in $Zyklen) {
+        #$File = New-Filename -BasePath $Path - 
+    }
+} 
+
 $z = Analyze-DACLogFile -Path .\DAC.LOG
 Test-DACZyklenChronologie $z
