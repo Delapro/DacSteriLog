@@ -1,5 +1,42 @@
 #CreatePSSchedService.PS1
 
+# damit die Sache mit dem lokalen Dienst funktioniert, muss der Dienst Zugriff auf die betreffende
+# LOG-Datei erhalten!
+# C:\DACSteriLog>icacls.exe SteriProtokollLogger.Log
+# SteriProtokollLogger.Log NT-AUTORITÄT\Lokaler Dienst:(F)
+#
+# dies erreicht man durch
+# icacls.exe SteriProtokollLogger.Log /grant "NT-Autorität\Lokaler Dienst:(F)" 
+#
+# https://msdn.microsoft.com/de-de/library/windows/desktop/ms684188(v=vs.85).aspx
+#
+
+# Log-Datei anlegen mit passenden Rechten für den Lokalen Dienst
+$LogFileName = "C:\DACSteriLog\SteriProtokoll.Log" 
+New-Item -Type File -Path $LogFileName
+$acl = Get-Acl $LogFileName
+$ar = New-Object System.Security.AccessControl.FileSystemAccessRule("NT-Autorität\Lokaler Dienst", "FullControl", "Allow")
+$acl.SetAccessRule($ar)
+Set-Acl $LogFileName $acl
+
+# Zum Abfragen der aktuellen Rechte verwendet man einfach
+(Get-Acl $LogFileName).Access
+
+# ALTERNATIVE:
+# möchte man die Rechte fürs Verzeichnis ändern:
+$LogDir = "C:\DACSteriLog"
+New-Item -ItemType Directory $LogDir
+$acl = Get-Acl $LogDir
+$localService = New-Object System.Security.Principal.SecurityIdentifier([System.Security.Principal.WellKnownSidType]::LocalServiceSid, $null);
+$rights = [System.Security.AccessControl.FileSystemRights]::FullControl
+$inheritance = [int]([System.Security.AccessControl.InheritanceFlags]::ContainerInherit) + [int]([System.Security.AccessControl.InheritanceFlags]::ObjectInherit)
+$propagation = [System.Security.AccessControl.PropagationFlags]::None
+$accessControl = [System.Security.AccessControl.AccessControlType]::Allow
+$AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($localService, $rights, $inheritance, $propagation , $accessControl)
+$acl.SetAccessRule($AccessRule)
+Set-Acl $LogDir $acl
+
+
 $ScriptToRun="C:\DACSteriLog\SteriProtokollLogger.PS1"
 $TaskName = "DacSteriLog"
 $TaskPath = "\MyTasks\Aufgaben" # beliebige Hierarchie möglich
