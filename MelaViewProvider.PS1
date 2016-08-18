@@ -119,6 +119,7 @@ Function Get-LastFilename {
             $Path = Join-Path $BasePath $Dirs[0].Name
             Write-Verbose "neuester Pfad: $Path"
             If (Test-Path ($path)) {
+                # TODO: Wenn das Verzeichnis leer ist, dann muss das vorhergehende Verzeichnis beachten werden!
                 $Files = Get-ChildItem -Path "$($Path)\*" -Include *.PRO, *.STR | sort Name -Descending
                 Write-Verbose "$($Files.Size) Dateien gefunden, neueste: $($Files[0].Name)"
                 $Files[0]
@@ -161,7 +162,7 @@ Function New-LogFilename {
         }
         $File = Join-Path $Path "$Device$Counter$ext"
         Write-Verbose "Anzulegender Dateiname: $File"
-        $FileInfo = New-Item $File
+        $FileInfo = New-Item -Type File $File
     } else {
         Throw "$BasePath ist nicht vorhanden!"
     }
