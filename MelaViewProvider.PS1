@@ -127,7 +127,17 @@ Function Get-LastFilename {
     }
 }
 
-Function New-Filename {
+Function Get-CounterFromFilename {
+    [CmdletBinding()]
+    Param(
+        [System.IO.FileInfo]$File,
+        [int]$Width=3
+    )
+    $Counter = $File.Basename.substring($File.Basename.Length - $Width)
+    $Counter
+}
+
+Function New-LogFilename {
     [CmdletBinding()]
     Param(
         [string]$BasePath,
@@ -163,8 +173,7 @@ Function Write-LogFile {
     [CmdletBinding()]
     Param(
         [string]$Filename,
-        [PSTypeName("DAC.Zyklus")]$Zyklus
+        [string]$RawData
     )
-    Write-Verbose "Schreibe $($Zyklus.Zyklus) in $Filename"
-    $Zyklus.RawData | Set-Content -Path $Filename -Force -Encoding Ascii
+    $RawData | Set-Content -Path $Filename -Force -Encoding Ascii
 }

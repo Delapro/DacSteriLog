@@ -118,6 +118,7 @@ Function Test-DACZyklenChronologie {
             }
             $TestZyklus = $NaechsterZyklus
         }
+        Write-Verbose "Endzyklus: $NaechsterZyklus"
     }
 
     $Chronologisch
@@ -210,6 +211,7 @@ Function Get-DACBlockPos {
 
 }
 
+<#
 Function Write-DACLog {
     [CmdletBinding()]
     Param(
@@ -222,6 +224,27 @@ Function Write-DACLog {
         #$File = New-Filename -BasePath $Path - 
     }
 } 
+#>
 
-$z = Analyze-DACLogFile -Path .\DAC.LOG
-Test-DACZyklenChronologie $z
+Function Write-DACLogFile {
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory=$true)]
+        [string]$BasePath,
+        [string]$Device,
+        [PSTypeName("DAC.Zyklus")]$Zyklus,
+        [string]$StartCounter=(Get-CounterFromFilename -File (Get-LastFilename -BasePath $BasePath))
+    )
+
+    Write-Verbose "Startzähler: $StartCounter"
+    for ($i = 0; $i -lt $Zyklus.Count; $i++) {
+        $StartCounter = Get-NextCounter -StartCounter $StartCounter
+        $Filename = New-LogFilename -BasePath $BasePath -Counter $StartCounter -Device $Device -Date $Zyklus[$i].Datum -Successful (-Not $Zyklus[$i].Fehlerhaft) 
+        Write-Verbose "Schreibe Zyklus $($Zyklus[$i].Zyklus) vom $($Zyklus[$i].Datum.Date) in $Filename"
+        Write-LogFile -Filename $Filename -RawData $Zyklus[$i].RawContent
+    }
+}
+
+
+#$z = Analyze-DACLogFile -Path .\DAC.LOG
+#Test-DACZyklenChronologie $z
