@@ -174,7 +174,10 @@ Function Write-LogFile {
     [CmdletBinding()]
     Param(
         [string]$Filename,
-        [string]$RawData
+        [string]$RawData,
+        [DateTime]$Datum=(Get-Date)
     )
     $RawData | Set-Content -Path $Filename -Force -Encoding Ascii
+    $File = Dir $Filename 
+    $File[0].LastWriteTime = $datum  
 }

@@ -241,7 +241,7 @@ Function Write-DACLogFile {
         $StartCounter = Get-NextCounter -StartCounter $StartCounter
         $Filename = New-LogFilename -BasePath $BasePath -Counter $StartCounter -Device $Device -Date $Zyklus[$i].Datum -Successful (-Not $Zyklus[$i].Fehlerhaft) 
         Write-Verbose "Schreibe Zyklus $($Zyklus[$i].Zyklus) vom $($Zyklus[$i].Datum.Date) in $Filename"
-        Write-LogFile -Filename $Filename -RawData $Zyklus[$i].RawContent
+        Write-LogFile -Filename $Filename -RawData $Zyklus[$i].RawContent -Datum $Zyklus[$i].Datum
     }
 }
 
