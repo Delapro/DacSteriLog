@@ -15,7 +15,7 @@ Function Test-NullBytesInLogFile {
     }
 }
 
-# enrfernt Nullbytes am Anfang der ersten Zeile
+# entfernt Nullbytes am Anfang der ersten Zeile
 Function Remove-NullBytesInLogFile {
     [CmdletBinding()]
     Param(
@@ -32,3 +32,79 @@ Function Remove-NullBytesInLogFile {
     }
 }
 
+# holt sich alle Log-Dateien aus dem Unterverzeichnis eines Basisverzeichnis, spielt diese zusammen
+# in eine temporäre Datei, liest diese ein, sortiert sie und prüft die Zyklen
+Function Test-Zyklen {
+    [CmdletBinding()]
+    Param(
+        [string]$BaseDir,
+        [string[]]$LogFileExtension=@("*.PRO", "*.STR")
+
+    )
+    
+    $z = Get-AllZyklen -BaseDir $BaseDir -LogFileExtension $LogFileExtension
+}
+
+<#
+.SYNOPSIS
+Ermittelt alle Log-Dateien aus einem Basisverzeichnis und gibt diese als DAC.Zyklus-Objekte zurück
+#>
+Function Get-AllZyklen {
+    [CmdletBinding()]
+    Param(
+        [string]$BaseDir,
+        [string[]]$LogFileExtension=@("*.PRO", "*.STR")
+    )
+    
+    $Files = Get-LogFiles -BaseDir $BaseDir -LogFileExtension $LogFileExtension
+    Write-Verbose "$($Files.Length)-Dateien ermittelt"
+    $TempFile = New-LogFile -File $Files 
+    Write-Verbose "Temporäre Logdatei: $TempFile"
+    $z = Analyze-DACLogFile -Path $TempFile
+    $z
+}
+
+# gibt die Zyklen in einer Gridview aus
+Function Show-AllZyklen  {
+    [CmdletBinding()]
+    Param(
+        [string]$BaseDir,
+        [string[]]$LogFileExtension=@("*.PRO", "*.STR")
+
+    )
+    
+    $z = Get-AllZyklen -BaseDir $BaseDir -LogFileExtension $LogFileExtension
+    $z | Out-GridView
+}
+
+<#
+.SYNOPSIS
+Ermittelt alle Log-Dateien (Endung *.PRO und *.STR) aus den Unterverzeichnissen eines Basisverzeichnis
+#>
+Function Get-LogFiles {
+    [CmdletBinding()]
+    Param(
+        [string]$BaseDir,
+        [string[]]$LogFileExtension=@("*.PRO", "*.STR")
+    )
+    $Files = Dir $BaseDir -Recurse -Include $LogFileExtension
+    $Files
+}
+
+<#
+.SYNOPSIS
+Erstellt eine temporäre Datei mit dem Inhalt aller übergebener Dateien
+#>
+Function New-LogFile {
+    [CmdletBinding()]
+    Param(
+        [System.IO.FileInfo[]]$File
+    )
+
+    for ($i = 0; $i -lt $File.Count; $i++) {
+        $Content += Get-Content $File[$i]
+    }
+    $Filename = New-TemporaryFile
+    $Content | Set-Content $Filename 
+    $Filename
+}

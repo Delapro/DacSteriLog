@@ -70,7 +70,7 @@ Function Analyze-DACLogFile {
     Param (
 		[Parameter(Mandatory=$true)]
 		[String]$Path,
-        [Long]$Index=0
+        [Long]$Index=0  # beginnt die Analyse in der angegebenen Zeile
 	)
 
     If (Test-Path $Path) {
