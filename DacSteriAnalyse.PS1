@@ -203,6 +203,15 @@ Function Get-DACBlockPos {
 
     If ($start -ne -1 -and $end -ne -1) {
         $DACBlock = $Log[$start..$end]
+        # Manchmal tauchen 0-Bytes am Anfang einer DAC Universal-Zeile auf, in diesem Fall
+        # müssen diese abgeschnitten werden, sonst gibt es später bei der Weiterverarbeitung
+        # Probleme
+        $DACBlock[0] = $DACBlock[0].TrimStart([char]0)
+#        for ($i = -1; $DACBlock[0][$i+1] -eq 0; $i++) {
+#        }
+#        If ($i -gt -1) {
+#            $DACBlock[0] = $DACBlock[0].Remove(0, $i+1)
+#        }
     } else {
         $DACBlock = $Null
     }
