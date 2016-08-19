@@ -23,9 +23,12 @@ Function Remove-NullBytesInLogFile {
     )
 
     for ($i = 0; $i -lt $File.Count; $i++) {
-        $Content = Get-Content -Path $File[0].FullName
+        Write-Verbose "Bearbeite $($File[$i].Fullname)"
+        $Datum = $File[$i].LastWriteTime
+        $Content = Get-Content -Path $File[$i].FullName
         $Content[0] = $Content[0].TrimStart([char]0) 
-        $Content | Set-Content -Path $File[0].FullName -Force
+        $Content | Set-Content -Path $File[$i].FullName -Force
+        $File[$i].LastWriteTime = $datum 
     }
 }
 
