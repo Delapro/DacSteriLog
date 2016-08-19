@@ -207,11 +207,6 @@ Function Get-DACBlockPos {
         # müssen diese abgeschnitten werden, sonst gibt es später bei der Weiterverarbeitung
         # Probleme
         $DACBlock[0] = $DACBlock[0].TrimStart([char]0)
-#        for ($i = -1; $DACBlock[0][$i+1] -eq 0; $i++) {
-#        }
-#        If ($i -gt -1) {
-#            $DACBlock[0] = $DACBlock[0].Remove(0, $i+1)
-#        }
     } else {
         $DACBlock = $Null
     }
