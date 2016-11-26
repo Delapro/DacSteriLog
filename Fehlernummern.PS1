@@ -197,15 +197,16 @@ Wechseln Sie den O-Ring aus, wenn er beschädigt ist.
 Bringen Sie den Deckel des Filtergehäuses ordnungsgemäß an.
 Wenn der Fehler wiederholt auftritt, wenden Sie sich bitte an Ihren
 autorisierten Händler.
-92 Die Spannungsversorgung des
-DAC UNIVERSAL war
-unterbrochen oder die „Clear“-
-Taste wurde während des
-Zyklus betätigt.
-Drücken Sie zum Zurücksetzen die „Clear“-Taste und starten Sie den
-DAC UNIVERSAL erneut.
-Wenn der Fehler wiederholt auftritt, wenden Sie sich bitte an Ihren
-autorisierten Händler.
+#>
+
+$FehlerBeschreibungen += New-Fehlerbeschreibung -CodeNr 92 -Beschreibung @"
+Die Spannungsversorgung des DAC UNIVERSAL war unterbrochen oder die „Clear“-Taste wurde während des Zyklus betätigt.
+"@ -Fehlerbehebung @"
+Drücken Sie zum Zurücksetzen die „Clear“-Taste und starten Sie den DAC UNIVERSAL erneut.
+Wenn der Fehler wiederholt auftritt, wenden Sie sich bitte an Ihren autorisierten Händler.
+"@
+
+<#
 93 Der Dampfgenerator ist
 überhitzt.
 Schalten Sie den DAC UNIVERSAL sofort aus.
