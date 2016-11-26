@@ -155,7 +155,6 @@ Function Analyze-DACZyklus {
     # oder
     # Zyklusende         01:12:08 FEHL
     $EndeLaufzeit = $Zyklus -match "$Zyklusende\s+(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)"
-    write-Verbose $Matches
     $EndZeit = $EndeLaufzeit.Replace($Zyklusende,"").Replace($FehlerID,"").Replace($OKID,"")
     Write-Verbose "$BeginnDatum $EndZeit $EndeLaufzeit"
     $Ende = Get-Date "$($BeginnDatum) $($EndZeit)"
