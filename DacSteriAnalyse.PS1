@@ -160,8 +160,8 @@ Function Analyze-DACZyklus {
     $Ende = Get-Date "$($BeginnDatum) $($EndZeit)"
     # Prüfen, ob die Enduhrzeit vor dem Beginn liegt, wenn ja dürfte es sich um den
     # Folgetag handeln
-    If ($EndZeit -lt $BeginnUhrzeit) {
-        $Ende.AddDays(1)
+    If ([DateTime]$EndZeit -lt [DateTime]$BeginnUhrzeit) {
+        $Ende = $Ende.AddDays(1)
     }
 
     $DACZyklus = [PSCustomObject]@{
