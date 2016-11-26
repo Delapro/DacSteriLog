@@ -143,19 +143,43 @@ Function Analyze-DACZyklus {
         $Fehler = ""
     }
 
+    # Zyklusbeginn wird aus den Kopfdaten ausgelesen:
+    # Dat.(T-M-J) 16-03-2016
+    # Zeit(H-M-S) 00:53:20
+    $BeginnDatum = $Zyklus[5].Substring(12)
+    $BeginnUhrzeit = $Zyklus[6].Substring(11)
+    $Beginn=Get-Date "$($BeginnDatum) $($BeginnUhrzeit)"
+
+    # Zyklusende ermitteln, entweder steht
+    # Zyklusende         01:12:08 Ok
+    # oder
+    # Zyklusende         01:12:08 FEHL
+    $EndeLaufzeit = $Zyklus -match "$Zyklusende\s+(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)"
+    write-Verbose $Matches
+    $EndZeit = $EndeLaufzeit.Replace($Zyklusende,"").Replace($FehlerID,"").Replace($OKID,"")
+    Write-Verbose "$BeginnDatum $EndZeit $EndeLaufzeit"
+    $Ende = Get-Date "$($BeginnDatum) $($EndZeit)"
+    # Prüfen, ob die Enduhrzeit vor dem Beginn liegt, wenn ja dürfte es sich um den
+    # Folgetag handeln
+    If ($EndZeit -lt $BeginnUhrzeit) {
+        $Ende.AddDays(1)
+    }
+
     $DACZyklus = [PSCustomObject]@{
                     PSTypeName="DAC.Zyklus"
                     Seriennummer=$Zyklus[1].Substring(12);
                     Programm=$Zyklus[2].Substring(12);
                     Deckel=$Zyklus[3].Substring(12);
                     Zyklus=[int]$Zyklus[4].Substring(12);
-                    Datum=Get-Date "$($Zyklus[5].Substring(12)) $($Zyklus[6].Substring(11))";
+                    Beginn=$Beginn
+                    Ende=$Ende
+                    Dauer=[TimeSpan]($Ende - $Beginn)
                     Phasen="";
                     Fehlerhaft=$Fehlerhaft;
                     Fehler=$Fehler;
                     RawContent=$Zyklus | Out-String
                 }
-    $DACZyklus | Add-Member -Type ScriptProperty -Name Wochentag -Value {(Get-Culture).DateTimeFormat.DayNames[$this.Datum.DayOfWeek.value__]}
+    $DACZyklus | Add-Member -Type ScriptProperty -Name Wochentag -Value {(Get-Culture).DateTimeFormat.DayNames[$this.Beginn.DayOfWeek.value__]}
 
     $DACZyklus
 }
@@ -244,8 +268,8 @@ Function Write-DACLogFile {
     for ($i = 0; $i -lt $Zyklus.Count; $i++) {
         $StartCounter = Get-NextCounter -StartCounter $StartCounter
         $Filename = New-LogFilename -BasePath $BasePath -Counter $StartCounter -Device $Device -Date $Zyklus[$i].Datum -Successful (-Not $Zyklus[$i].Fehlerhaft) 
-        Write-Verbose "Schreibe Zyklus $($Zyklus[$i].Zyklus) vom $($Zyklus[$i].Datum.Date) in $Filename"
-        Write-LogFile -Filename $Filename -RawData $Zyklus[$i].RawContent -Datum $Zyklus[$i].Datum
+        Write-Verbose "Schreibe Zyklus $($Zyklus[$i].Zyklus) vom $($Zyklus[$i].Ende.Date) in $Filename"
+        Write-LogFile -Filename $Filename -RawData $Zyklus[$i].RawContent -Datum $Zyklus[$i].Ende
     }
 }
 
