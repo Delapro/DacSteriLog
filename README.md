@@ -7,7 +7,7 @@ Zunächst muss man die Scripte laden, da es noch kein vollständiges Modul gibt.
 
 ```Powershell
 . .\DacSteriAnalyse.PS1
-. .\DatSteriLogger.PS1
+. .\DacSteriLogger.PS1
 . .\Fehlernummern.PS1
 . .\MelaViewProvider.PS1
 ```
