@@ -13,12 +13,14 @@ $DACUniversal_DE = "DAC Universal"
 $Zyklusende_DE = "Zyklusende"
 $FehlerID_DE = "FEHL"
 $OKID_DE = "Ok"
+$FehlerCode_DE = "Fehler code"
 
 # Englisch
 $DACUniversal_EN = "DAC Universal"
 $Zyklusende_EN = "Cycle end"
 $FehlerID_EN = "FAIL"
 $OKID_EN = "OK"
+$FehlerCode_EN = "Fehler code"
 
 # Französisch
 # TODO:
@@ -26,12 +28,14 @@ $DACUniversal_FR = "DAC Universal"
 $Zyklusende_FR = "Cycle end"
 $FehlerID_FR = "FAIL"
 $OKID_FR = "OK"
+$FehlerCode_FR = "Fehler code"
 
 # Deutsch ist Vorgabe
 $DACUniversal = $DACUniversal_DE
 $Zyklusende = $Zyklusende_DE
 $FehlerID = $FehlerID_DE
 $OKID = $OKID_DE
+$FehlerCode = $FehlerCode_DE
 
 Function Set-LogFileLanguage {
     [CmdletBinding()]
@@ -137,9 +141,18 @@ Function Analyze-DACZyklus {
     If ($Zyklus -match "$Zyklusende\s+(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d) $OKID") {
         $Fehlerhaft = $False
         $Fehler = ""
+        $MehrereFehler = $False
     } else {
         $Fehlerhaft = $true
         # möglichst viele Fehlerinformationen ermitteln
+        $Fehlercode = $Zyklus | Select-String -Pattern "$($FehlerCode)\s*[0-9]*"
+        $MehrereFehler = $False
+        # es kann theoretisch mehrere Fehlercodes geben, wir nehmen nur den ersten
+        If ($Fehlercode -is [Array]) {
+            $Fehlercode = $Fehlercode[0]
+            $MehrereFehler = $True
+        }
+        # TODO: Jetzt muss noch der Fehlercode extrahiert werden!!
         $Fehler = ""
     }
 
@@ -176,6 +189,7 @@ Function Analyze-DACZyklus {
                     Phasen="";
                     Fehlerhaft=$Fehlerhaft;
                     Fehler=$Fehler;
+                    MehrereFehler=$MehrereFehler;
                     RawContent=$Zyklus | Out-String
                 }
     $DACZyklus | Add-Member -Type ScriptProperty -Name Wochentag -Value {(Get-Culture).DateTimeFormat.DayNames[$this.Beginn.DayOfWeek.value__]}
