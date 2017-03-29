@@ -33,7 +33,7 @@ Test-DacZyklenChronologie -Zyklen $z[$lz.Zyklus..-1] -verbose
 
 # Element des letzten Zylkus in der Logdatei ermitteln
 $ze = $z | where zyklus -eq $lz.Zyklus
-$e = [array]::IndexOf($z, $ze) 
+$e = [array]::IndexOf($z, $ze)
 If ($e -eq -1) {
     # Sonderfall, die Zyklennummer des letzten Zyklus befindet sich nicht in der LOG-Datei, also am einfachsten den ersten Eintrag des Zyklus verwenden
     $e=0
@@ -52,6 +52,3 @@ $tz | where Fehlerhaft -eq $true | fl Beginn, Zyklus
 
 
 ```
-
-
-
