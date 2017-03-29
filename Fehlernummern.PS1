@@ -130,16 +130,18 @@ erreicht.
 Wenn der Wasserstand zu niedrig ist, füllen Sie demineralisiertes oder
 destilliertes Wasser (Wasserleitfähigkeit < 3,0 µS/cm) in den Wassertank.
 Wenden Sie sich bitte an Ihren autorisierten Händler.
-81 Niedriger Füllstand im
-Wassertank oder in der
-Ölflasche, siehe Display DAC
-UNIVERSAL
+#>
+$FehlerBeschreibungen += New-Fehlerbeschreibung -CodeNr 81 -Beschreibung @"
+81 Niedriger Füllstand im Wassertank oder in der Ölflasche, siehe Display DAC UNIVERSAL
+"@ -Fehlerbehebung @"
 Wenn der Wasserstand zu niedrig ist, füllen Sie demineralisiertes oder
 destilliertes Wasser (Wasserleitfähigkeit < 3,0 µS/cm) in den Wassertank.
 Wechseln Sie die NitramOil #2 Flasche, falls diese leer ist, siehe
 „Einsetzen/Auswechseln des Pflegekonzentrates [ → 162]“.
 Wenn der Fehler wiederholt auftritt, wenden Sie sich bitte an Ihren
 autorisierten Händler.
+"@
+<#
 82 Fehler im Dampfgenerator Wenden Sie sich bitte an Ihren autorisierten Händler.
 83 Temperatursensor in der
 Kammer ist defekt.
