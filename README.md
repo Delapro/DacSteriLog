@@ -11,6 +11,8 @@ Zunächst muss man die Scripte laden, da es noch kein vollständiges Modul gibt.
 . .\DacSteriLogger.PS1
 . .\Fehlernummern.PS1
 . .\MelaViewProvider.PS1
+# zur Diagnose bestehender LOG-Dateien
+. .\Util\Check.PS1
 ```
 
 ## Anwendung
@@ -49,6 +51,19 @@ Test-DacZyklenChronologie -Zyklen $tz -verbose -Continue
 # Fehlerhafte Zyklen ermitteln
 $tz | where Fehlerhaft -eq $true | fl Beginn, Zyklus
 
+# bestehende LOG-Dateien einlesen
+$az = Get-AllZyklen $basePath
 
+# sucht man davon nur bestimmte Wochentage die erfolgreich waren
+$azd = $az | where {$_.Wochentag -eq "Dienstag" -and $_Fehlerhaft -eq $false}
+
+# sollten verschiedene LOG-Dateien zusammengespielt werden, so müssen diese sortiert werden
+$kombination = $z + $nz
+$kombination = $kombination | sort Zyklus
+Test-DACZyklenChronologie -Zyklen $kombination -Verbose -Continue
+
+# Wenn Test-DACZyklenChronologie $true meldet, kann man die Daten im Melag speichern
+# man könnte davor noch das $basePath-Verzeichnis wegkopieren
+Write-DACLogFile -BasePath $basePath -Device DAC01 -Zyklen $kz -Verbose
 
 ```
