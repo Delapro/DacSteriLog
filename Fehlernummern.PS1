@@ -132,7 +132,7 @@ destilliertes Wasser (Wasserleitfähigkeit < 3,0 µS/cm) in den Wassertank.
 Wenden Sie sich bitte an Ihren autorisierten Händler.
 #>
 $FehlerBeschreibungen += New-Fehlerbeschreibung -CodeNr 81 -Beschreibung @"
-81 Niedriger Füllstand im Wassertank oder in der Ölflasche, siehe Display DAC UNIVERSAL
+Niedriger Füllstand im Wassertank oder in der Ölflasche, siehe Display DAC UNIVERSAL
 "@ -Fehlerbehebung @"
 Wenn der Wasserstand zu niedrig ist, füllen Sie demineralisiertes oder
 destilliertes Wasser (Wasserleitfähigkeit < 3,0 µS/cm) in den Wassertank.
