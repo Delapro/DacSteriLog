@@ -87,7 +87,7 @@ Function Get-LogFiles {
         [string]$BaseDir,
         [string[]]$LogFileExtension=@("*.PRO", "*.STR")
     )
-    $Files = Dir $BaseDir -Recurse -Include $LogFileExtension
+    $Files = Get-ChildItem $BaseDir -Recurse -Include $LogFileExtension
     $Files
 }
 
@@ -104,7 +104,8 @@ Function New-LogFile {
     for ($i = 0; $i -lt $File.Count; $i++) {
         $Content += Get-Content $File[$i]
     }
-    $Filename = New-TemporaryFile
+# PS5-Only:   $Filename = New-TemporaryFile
+    $Filename = [System.IO.Path]::GetTempFileName()
     $Content | Set-Content $Filename 
     $Filename
 }
