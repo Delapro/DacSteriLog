@@ -54,6 +54,9 @@ $tz | where Fehlerhaft -eq $true | fl Beginn, Zyklus
 # bestehende LOG-Dateien einlesen
 $az = Get-AllZyklen $basePath
 
+# zur Sicherheit sollten die Zyklen sortiert werden
+$az = $az | sort Zyklen
+
 # sucht man davon nur bestimmte Wochentage die erfolgreich waren
 $azd = $az | where {$_.Wochentag -eq "Dienstag" -and $_Fehlerhaft -eq $false}
 
