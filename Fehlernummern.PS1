@@ -208,11 +208,14 @@ Drücken Sie zum Zurücksetzen die „Clear“-Taste und starten Sie den DAC UNI
 Wenn der Fehler wiederholt auftritt, wenden Sie sich bitte an Ihren autorisierten Händler.
 "@
 
-<#
-93 Der Dampfgenerator ist
-überhitzt.
-Schalten Sie den DAC UNIVERSAL sofort aus.
+
+$FehlerBeschreibungen += New-Fehlerbeschreibung -CodeNr 93 -Beschreibung @"
+Der Dampfgenerator ist überhitzt. Schalten Sie den DAC UNIVERSAL sofort aus.
+"@ -Fehlerbehebung @"
 Wenden Sie sich bitte an Ihren autorisierten Händler.
+"@
+
+<#
 95 Der DAC UNIVERSAL hat im
 Standby-Modus mehr als 7 mal
 Wasser „angefordert”.
