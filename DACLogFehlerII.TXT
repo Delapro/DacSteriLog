@@ -1,0 +1,56 @@
+ DAC Universal                   
+Serien Nr:  601362
+Programm:   Universal/134?C/3min
+Deckel:     Standard            
+Zyklus:     456
+Dat.(T-M-J) 26-03-2017
+Zeit(H-M-S) 16:27:31
+--------------------------------
+Phase:             Uhrzeit: Erg:
+Start              16:28:02 Ok  
+Dichtheitspruefung 16:28:38 Ok  
+Innenreinigung     16:28:58 Ok  
+Schmierung         16:29:31 Ok  
+Aussenreinigung    16:37:48 Ok  
+Back flush         16:39:30 Ok  
+Beginn Haltezeit   16:40:00 Ok  
+--------------------------------
+Uhrzeit:           ?C:      bar:
+16:40:08           135.3    3.21
+Maximum            135.4    3.22
+Minimum            135.3    3.17
+Dauer (m-s)        00-21
+--------------------------------
+Sterilisation      16:40:21 FEHL
+Error code   93
+
+Prozessende        16:44:29 FEHL
+Bestaetigung       16:44:29 FEHL
+--------------------------------
+Zyklusende         16:44:30 FEHL
+--------------------------------
+
+
+            Fehler!
+
+Error code   93
+
+Abbruch Sterilisation
+
+
+
+Error code   72
+
+Error code   72
+
+Error code   72
+
+Error code   72
+
+Error code   72
+
+Error code   72
+
+Error code   72
+
+
