@@ -232,7 +232,13 @@ Function Get-DACBlockPos {
                     } else {
                         $end = $Index
                     }
-                }            
+                } else {
+                    # nach Fehlerzyklus ende erkennen
+                    while ($Index -lt $log.Length -and ($Zeile -notmatch "DAC Universal") -and ($Zeile -notmatch "===----") ) {
+                        $Zeile = $Log[$Index++]
+                    }
+                    $end = $Index
+                }
             }
         }
         $index++
@@ -289,3 +295,4 @@ Function Write-DACLogFile {
 
 #$z = Analyze-DACLogFile -Path .\DAC.LOG
 #Test-DACZyklenChronologie $z
+$z = Analyze-DACLogFile -Path .\DACLogFehlerII.TXT
