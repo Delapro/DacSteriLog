@@ -171,12 +171,16 @@ Function Analyze-DACZyklus {
     $EndZeit = $EndeLaufzeit.Replace($Zyklusende,"").Replace($FehlerID,"").Replace($OKID,"")
     Write-Verbose "$BeginnDatum $EndZeit $EndeLaufzeit"
     $Ende = Get-Date "$($BeginnDatum) $($EndZeit)"
+    $Dauer = $null
     # Prüfen, ob die Enduhrzeit vor dem Beginn liegt, wenn ja dürfte es sich um den
     # Folgetag handeln
-    If ([DateTime]$EndZeit -lt [DateTime]$BeginnUhrzeit) {
-        $Ende = $Ende.AddDays(1)
+    If ($EndZeit -ne $null -and $BeginnUhrzeit -ne $null) {
+        If ([DateTime]$EndZeit -lt [DateTime]$BeginnUhrzeit) {
+            $Ende = $Ende.AddDays(1)
+        }
+        $Dauer = [TimeSpan]($Ende - $Beginn)
     }
-
+    
     $DACZyklus = [PSCustomObject]@{
                     PSTypeName="DAC.Zyklus"
                     Seriennummer=$Zyklus[1].Substring(12);
@@ -185,7 +189,7 @@ Function Analyze-DACZyklus {
                     Zyklus=[int]$Zyklus[4].Substring(12);
                     Beginn=$Beginn
                     Ende=$Ende
-                    Dauer=[TimeSpan]($Ende - $Beginn)
+                    Dauer=$Dauer
                     Phasen="";
                     Fehlerhaft=$Fehlerhaft;
                     Fehler=$Fehler;
