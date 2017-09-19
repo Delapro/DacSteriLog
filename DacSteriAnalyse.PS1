@@ -120,6 +120,13 @@ Function Test-DACZyklenChronologie {
                     break
                 }
             }
+            If (-Not $Zyklen[$i].Fehlerhaft -and $Zyklen[$i-1].Beginn -ge $Zyklen[$i].Beginn) {
+                Write-Verbose "Datumsinkonsistenz zwischen $TestZyklus und $NaechsterZyklus"
+                $Chronologisch = $False
+                If (-Not $Continue) {
+                    break
+                }
+            }
             $TestZyklus = $NaechsterZyklus
         }
         Write-Verbose "Endzyklus: $NaechsterZyklus"
