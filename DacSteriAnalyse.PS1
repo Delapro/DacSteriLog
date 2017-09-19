@@ -134,6 +134,14 @@ Function Test-DACZyklenChronologie {
                     break
                 }
             }
+            If ($Zyklen[$i-1].Seriennummer -ne $Zyklen[$i].Seriennummer) {
+                Write-Verbose "Seriennummer stimmt nicht überein zwischen $TestZyklus und $NaechsterZyklus"
+                $Chronologisch = $False
+                If (-Not $Continue) {
+                    break
+                }
+            }
+            
             $TestZyklus = $NaechsterZyklus
         }
         Write-Verbose "Endzyklus: $NaechsterZyklus"
