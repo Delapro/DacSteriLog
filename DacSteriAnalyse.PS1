@@ -318,6 +318,67 @@ Function Write-DACLogFile {
     }
 }
 
+function Get-ElementFromZyklus {
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory=$true)]
+        [PSTypeName("DAC.Zyklus")]$Zyklen,
+        [Parameter(Mandatory=$true)]
+        [System.Int32]$Zyklus
+    )
+    $ze = $Zyklen | Where-Object zyklus -eq $Zyklus
+    $e = [array]::IndexOf($Zyklen, $ze)
+    $e
+}
+
+<#
+.SYNOPSIS
+Short description
+
+.DESCRIPTION
+Long description
+
+.PARAMETER Zyklen
+Parameter description
+
+.PARAMETER Zyklus
+Parameter description
+
+.EXAMPLE
+An example
+
+.NOTES
+Diese Routine ist eine Alternative zur reinen Powershell-Methode
+    $z | where Zyklus -In (456,458) | select Wochentag, Beginn, Ende, Zyklus
+was 
+    Get-ZyklusFromZyklen -Zyklen $z -Zyklus 456, 458
+entspricht!
+#>
+function Get-ZyklusFromZyklen {
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory=$true)]
+        [PSTypeName("DAC.Zyklus")]$Zyklen,
+        [Parameter(Mandatory=$true)]
+        [System.Int32[]]$Zyklus
+    )
+
+    $result = @()
+    # Prüfen, ob eine oder meherere Zyklusnummern übergeben wurden, gegebenfalls wandeln
+    If (-Not ($Zyklus -is [array])) {
+        $Zyklus = @($Zyklus)
+    }
+
+    foreach ($z in $Zyklus) {
+        $e = Get-ElementFromZyklus -Zyklen $Zyklen -Zyklus $z
+        If ($e -ne -1) {
+            $result += $Zyklen[$e]
+        }
+    }
+
+    $result
+}
+
 
 #$z = Analyze-DACLogFile -Path .\DAC.LOG
 #Test-DACZyklenChronologie $z

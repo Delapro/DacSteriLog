@@ -33,9 +33,8 @@ $z = Analyze-DacLogFile -Path $logFile
 # Test auf Fehler
 Test-DacZyklenChronologie -Zyklen $z[$lz.Zyklus..-1] -verbose
 
-# Element des letzten Zylkus in der Logdatei ermitteln
-$ze = $z | where zyklus -eq $lz.Zyklus
-$e = [array]::IndexOf($z, $ze)
+# Element des letzten Zyklus in der Logdatei ermitteln
+$e = Get-ElementFromZyklus -Zyklen $z -Zyklus $lz.Zyklus
 If ($e -eq -1) {
     # Sonderfall, die Zyklennummer des letzten Zyklus befindet sich nicht in der LOG-Datei, also am einfachsten den ersten Eintrag des Zyklus verwenden
     $e=0
