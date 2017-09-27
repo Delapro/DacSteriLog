@@ -103,10 +103,12 @@ Function Test-DACZyklenChronologie {
     [CmdletBinding()]
     Param (
         [PSTypeName('DAC.Zyklus')]$Zyklen,
-        [Switch]$Continue
+        [Switch]$Continue,
+        [Switch]$PassThru
     )
     
     $Chronologisch = $True
+    $Fehler = @()
 
     If ($Zyklen.Count -gt 1) {
         $TestZyklus = $Zyklen[0].Zyklus
@@ -114,28 +116,60 @@ Function Test-DACZyklenChronologie {
         for ($i = 1; $i -lt $Zyklen.Count; $i++) {
             $NaechsterZyklus = $Zyklen[$i].Zyklus
             If (($TestZyklus +1) -ne $NaechsterZyklus ) {
-                Write-Verbose "unerlaubter Zyklensprung von $($NaechsterZyklus - $TestZyklus -1) Zyklen: $TestZyklus auf $NaechsterZyklus"
+                $Fehlertext = "unerlaubter Zyklensprung von $($NaechsterZyklus - $TestZyklus -1) Zyklen: $TestZyklus auf $NaechsterZyklus"
+                If ($PassThru) {
+                    $Fehler += [PSCustomObject]@{PSTypeName="DAC.Zyklenfehler";
+                                                 Fehlertext=$Fehlertext;
+                                                 VonZyklus=$TestZyklus
+                                                 BisZyklus=$NaechsterZyklus
+                                                }
+                }
+                Write-Verbose $Fehlertext
                 $Chronologisch = $False
                 If (-Not $Continue) {
                     break
                 }
             }
             If (-Not $Zyklen[$i].Fehlerhaft -and $Zyklen[$i-1].Beginn -ge $Zyklen[$i].Beginn) {
-                Write-Verbose "Datumsinkonsistenz zwischen $TestZyklus und $NaechsterZyklus"
+                $Fehlertext = "Datumsinkonsistenz zwischen $TestZyklus und $NaechsterZyklus"
+                If ($PassThru) {
+                    $Fehler += [PSCustomObject]@{PSTypeName="DAC.Zyklenfehler";
+                                                 Fehlertext=$Fehlertext;
+                                                 VonZyklus=$TestZyklus
+                                                 BisZyklus=$NaechsterZyklus
+                                                }
+                }
+                Write-Verbose $Fehlertext
                 $Chronologisch = $False
                 If (-Not $Continue) {
                     break
                 }
             }
             If (-Not $Zyklen[$i].Fehlerhaft -and $Zyklen[$i-1].Ende -ge $Zyklen[$i].Beginn) {
-                Write-Verbose "Datumsinkonsistenz2 zwischen $TestZyklus und $NaechsterZyklus, EndZeit und nächste Anfangszeit überlappen sich"
+                $Fehlertext = "Datumsinkonsistenz2 zwischen $TestZyklus und $NaechsterZyklus, EndZeit und nächste Anfangszeit überlappen sich"
+                If ($PassThru) {
+                    $Fehler += [PSCustomObject]@{PSTypeName="DAC.Zyklenfehler";
+                                                 Fehlertext=$Fehlertext;
+                                                 VonZyklus=$TestZyklus
+                                                 BisZyklus=$NaechsterZyklus
+                                                }
+                }
+                Write-Verbose $Fehlertext
                 $Chronologisch = $False
                 If (-Not $Continue) {
                     break
                 }
             }
             If ($Zyklen[$i-1].Seriennummer -ne $Zyklen[$i].Seriennummer) {
-                Write-Verbose "Seriennummer stimmt nicht überein zwischen $TestZyklus und $NaechsterZyklus"
+                $Fehlertext = "Seriennummer stimmt nicht überein zwischen $TestZyklus und $NaechsterZyklus"
+                If ($PassThru) {
+                    $Fehler += [PSCustomObject]@{PSTypeName="DAC.Zyklenfehler";
+                                                 Fehlertext=$Fehlertext;
+                                                 VonZyklus=$TestZyklus
+                                                 BisZyklus=$NaechsterZyklus
+                                                }
+                }
+                Write-Verbose $Fehlertext
                 $Chronologisch = $False
                 If (-Not $Continue) {
                     break
@@ -147,7 +181,11 @@ Function Test-DACZyklenChronologie {
         Write-Verbose "Endzyklus: $NaechsterZyklus"
     }
 
-    $Chronologisch
+    If ($PassThru) {
+        $Fehler
+    } else {
+        $Chronologisch
+    }
 }
 
 Function Analyze-DACZyklus {
@@ -382,4 +420,4 @@ function Get-ZyklusFromZyklen {
 
 #$z = Analyze-DACLogFile -Path .\DAC.LOG
 #Test-DACZyklenChronologie $z
-$z = Analyze-DACLogFile -Path .\DACLogFehlerII.TXT
+#$z = Analyze-DACLogFile -Path .\DACLogFehlerII.TXT
