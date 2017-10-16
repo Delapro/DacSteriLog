@@ -21,14 +21,20 @@ Function Get-Week {
     )
 
     $dfi=[System.Globalization.DateTimeFormatInfo]::CurrentInfo
+    $dayOfWeek = $Date.DayOfWeek
+    If ($dayOfWeek -eq 0) {
+        # damit die Berechnungen unten auch Sonntags klappen
+        $dayOfWeek = 7
+    }
+
     If ($BeginOfWeek) {
-        $date.AddDays(($Date.DayOfWeek - $dfi.FirstDayOfWeek) *-1).Date
+        $date.AddDays(($dayOfWeek - $dfi.FirstDayOfWeek) *-1).Date
     } elseif ($EndOfWeek) {
-        $date.AddDays(($Date.DayOfWeek - $dfi.FirstDayOfWeek) *-1).Date.AddDays(7).Date.AddSeconds(-1)
+        $date.AddDays(($dayOfWeek - $dfi.FirstDayOfWeek) *-1).Date.AddDays(7).Date.AddSeconds(-1)
     } elseif ($Friday) {
-        $date.AddDays(($Date.DayOfWeek - [System.DayOfWeek]::Friday) *-1).Date.AddDays(1).Date.AddSeconds(-1)
+        $date.AddDays(($dayOfWeek - [System.DayOfWeek]::Friday) *-1).Date.AddDays(1).Date.AddSeconds(-1)
     } elseif ($Saturday) {
-        $date.AddDays(($Date.DayOfWeek - [System.DayOfWeek]::Saturday) *-1).Date.AddDays(1).Date.AddSeconds(-1)
+        $date.AddDays(($dayOfWeek - [System.DayOfWeek]::Saturday) *-1).Date.AddDays(1).Date.AddSeconds(-1)
     } else {
         $cal=$dfi.Calendar
         $cal.GetWeekOfYear($Date.Date, $dfi.CalendarWeekRule, $dfi.FirstDayOfWeek)
