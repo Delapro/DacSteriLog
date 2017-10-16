@@ -31,7 +31,7 @@ Function Get-Week {
         $date.AddDays(($Date.DayOfWeek - [System.DayOfWeek]::Saturday) *-1).Date.AddDays(1).Date.AddSeconds(-1)
     } else {
         $cal=$dfi.Calendar
-        $cal.GetWeekOfYear((Get-Date).Date, $dfi.CalendarWeekRule, $dfi.FirstDayOfWeek)
+        $cal.GetWeekOfYear($Date.Date, $dfi.CalendarWeekRule, $dfi.FirstDayOfWeek)
     }
 
 }
