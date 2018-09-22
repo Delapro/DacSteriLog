@@ -1,5 +1,5 @@
  DAC Universal                   
-Serien Nr:  501052
+Serien Nr:  601362
 Programm:   Universal/134?C/3min
 Deckel:     Standard            
 Zyklus:     1015
