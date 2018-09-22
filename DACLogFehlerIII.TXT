@@ -1,0 +1,11 @@
+ DAC Universal                   
+Serien Nr:  501052
+Programm:   Universal/134?C/3min
+Deckel:     Standard            
+Zyklus:     1015
+Dat.(T-M-J) 09-08-2018
+Zeit(H-M-S) 10:04:59
+--------------------------------
+Phase:             Uhrzeit: Erg:
+ Error code   92
+
