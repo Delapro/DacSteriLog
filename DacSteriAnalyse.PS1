@@ -214,7 +214,7 @@ Function Analyze-DACZyklus {
         }
         # TODO: Jetzt muss noch der Fehlercode extrahiert werden!!
         $Fehler = ""
-        $Write-Verbose "Fehler ermittelt! $Fehlercode"
+        Write-Verbose "Fehler ermittelt! $Fehlercode"
     }
 
     # Zyklusbeginn wird aus den Kopfdaten ausgelesen:
