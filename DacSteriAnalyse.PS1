@@ -214,6 +214,7 @@ Function Analyze-DACZyklus {
         }
         # TODO: Jetzt muss noch der Fehlercode extrahiert werden!!
         $Fehler = ""
+        $Write-Verbose "Fehler ermittelt! $Fehlercode"
     }
 
     # Zyklusbeginn wird aus den Kopfdaten ausgelesen:
@@ -228,7 +229,14 @@ Function Analyze-DACZyklus {
     # oder
     # Zyklusende         01:12:08 FEHL
     $EndeLaufzeit = $Zyklus -match "$Zyklusende\s+(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)"
-    $EndZeit = $EndeLaufzeit.Replace($Zyklusende,"").Replace($FehlerID,"").Replace($OKID,"")
+    If ($EndeLaufzeit.Length -gt 0) {
+        $EndZeit = $EndeLaufzeit.Replace($Zyklusende,"").Replace($FehlerID,"").Replace($OKID,"")
+    } else {
+        # keine Endzeit ermittelbar, wahrscheinlich weil schwerer Fehler
+        # letzte protokollierte Zeit ermitteln, wenn diese nicht ermittelbar
+        # dann die Anfangszeit als Endzeit setzen
+        $EndZeit = $BeginnUhrzeit
+    }
     Write-Verbose "$BeginnDatum $EndZeit $EndeLaufzeit"
     $Ende = Get-Date "$($BeginnDatum) $($EndZeit)"
     $Dauer = $null
