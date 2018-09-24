@@ -38,6 +38,8 @@ $e = Get-ElementFromZyklus -Zyklen $z -Zyklus $lz.Zyklus
 If ($e -eq -1) {
     # Sonderfall, die Zyklennummer des letzten Zyklus befindet sich nicht in der LOG-Datei, also am einfachsten den ersten Eintrag des Zyklus verwenden
     $e=0
+} else {
+    $e++
 }
 
 # neues Array mit den zu testenden Zyklen erstellen und auf Konsistenz prüfen
@@ -62,6 +64,10 @@ $azd = $az | where {$_.Wochentag -eq "Dienstag" -and $_.Fehlerhaft -eq $false}
 # sucht man einen Eintrag an einem bestimmten Wochentag der zwischen 11:30 Uhr und  17 Uhr lief:
 $azd = $az | where {$_.Wochentag -eq "Dienstag" -and (NachUhrzeit $_.Beginn "11:30") -and (VorUhrzeit $_.Ende "16:59")  -and $_.Fehlerhaft -eq $false}
 
+# zur schnelleren Analyse kann man auch PassThru verwenden:
+$p=Test-DacZyklenChronologie -Zyklen $z -verbose -PassThru
+$z | where Zyklus -In ($p.VonZyklus,$p.BisZyklus)| select Zyklus, Wochentag, Beginn, Ende| ft -AutoSize
+
 # sollten verschiedene LOG-Dateien zusammengespielt werden, so müssen diese sortiert werden
 $kombination = $z + $nz
 $kombination = $kombination | sort Zyklus
@@ -69,6 +75,6 @@ Test-DACZyklenChronologie -Zyklen $kombination -Verbose -Continue
 
 # Wenn Test-DACZyklenChronologie $true meldet, kann man die Daten im Melag speichern
 # man könnte davor noch das $basePath-Verzeichnis wegkopieren
-Write-DACLogFile -BasePath $basePath -Device DAC01 -Zyklen $kz -Verbose
-
+Write-DACLogFile -BasePath $basePath -Device DAC01 -Zyklus $tz -Verbose
+                                                   # sollte Zyklen heißen!
 ```
