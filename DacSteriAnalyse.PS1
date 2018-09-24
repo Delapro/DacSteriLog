@@ -425,6 +425,24 @@ function Get-ZyklusFromZyklen {
     $result
 }
 
+# Helperfunktionen für die Uhrzeit
+Function NachUhrzeit {
+    Param(
+        [DateTime]$date,
+        [String]$Uhrzeit
+    ) 
+    
+    $date.TimeOfDay.Ticks -ge (Get-Date $Uhrzeit).TimeOfDay.Ticks
+}
+
+Function VorUhrzeit {
+    Param(
+        [DateTime]$date,
+        [String]$Uhrzeit
+    ) 
+    
+    $date.TimeOfDay.Ticks -le (Get-Date $Uhrzeit).TimeOfDay.Ticks
+}
 
 #$z = Analyze-DACLogFile -Path .\DAC.LOG
 #Test-DACZyklenChronologie $z

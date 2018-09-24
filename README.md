@@ -59,6 +59,9 @@ $az = $az | sort Zyklen
 # sucht man davon nur bestimmte Wochentage die erfolgreich waren
 $azd = $az | where {$_.Wochentag -eq "Dienstag" -and $_.Fehlerhaft -eq $false}
 
+# sucht man einen Eintrag an einem bestimmten Wochentag der zwischen 11:30 Uhr und  17 Uhr lief:
+$azd = $az | where {$_.Wochentag -eq "Dienstag" -and (NachUhrzeit $_.Beginn "11:30") -and (VorUhrzeit $_.Ende "16:59")  -and $_.Fehlerhaft -eq $false}
+
 # sollten verschiedene LOG-Dateien zusammengespielt werden, so müssen diese sortiert werden
 $kombination = $z + $nz
 $kombination = $kombination | sort Zyklus
