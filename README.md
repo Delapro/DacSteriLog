@@ -57,7 +57,7 @@ $az = Get-AllZyklen $basePath
 $az = $az | sort Zyklen
 
 # sucht man davon nur bestimmte Wochentage die erfolgreich waren
-$azd = $az | where {$_.Wochentag -eq "Dienstag" -and $_Fehlerhaft -eq $false}
+$azd = $az | where {$_.Wochentag -eq "Dienstag" -and $_.Fehlerhaft -eq $false}
 
 # sollten verschiedene LOG-Dateien zusammengespielt werden, so müssen diese sortiert werden
 $kombination = $z + $nz
