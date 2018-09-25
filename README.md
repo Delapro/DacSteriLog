@@ -70,6 +70,11 @@ $z | where Zyklus -In ($p.VonZyklus,$p.BisZyklus)| select Zyklus, Wochentag, Beg
 # Tage mit bestimmten Kriterien zur Auswahl stellen, das ausgewählte Objekt in die Zwischenablage kopieren
 $z | where {$_.Wochentag -eq "Montag" -and (NachUhrzeit $_.Beginn "16:00") -and (VorUhrzeit $_.Ende "23:30")  -and $_.Fehlerhaft -eq $false } |Out-GridView -PassThru | select -ExpandProperty rawContent | clip
 
+# um Zeiträume auf bestimmte Tage mit Uhrzeiten zu begrenzen sollte man [timespan]::TicksPerDay mit dem Wochentag 
+# multiplizieren, dann noch die aktuelle Zeit addieren, damit können dann Vergleiche angestellt werden.
+# NachUhrzeit -Wochentag "Montag" -Uhrzeit "12:00"  => (Get-Date).DayOfWeek * [TimeSpan]::TicksPerDay + (get-Date)
+# VorUhrzeit -Wochentag "Dienstag" -Uhrzeit "17:59:59"
+
 # sollten verschiedene LOG-Dateien zusammengespielt werden, so müssen diese sortiert werden
 $kombination = $z + $nz
 $kombination = $kombination | sort Zyklus
