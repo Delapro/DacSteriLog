@@ -41,3 +41,23 @@ Function Get-Week {
     }
 
 }
+
+# ermittelt zu einem Datum den ersten Zeitpunkt des Tages, wenn kein Datum übergeben wird, vom aktuellen Tag
+Function Get-StartOfDay {
+    [CmdletBinding()]
+    Param(
+        [DateTime]$Date=(Get-Date)
+    )
+
+    $Date.Date
+}
+
+# ermittelt zu einem Datum den letzten Zeitpunkt des Tages, wenn kein Datum übergeben wird, vom aktuellen Tag
+Function Get-EndOfDay {
+    [CmdletBinding()]
+    Param(
+        [DateTime]$Date=(Get-Date)
+    )
+
+    $Date.Date.AddDays(1).AddMilliseconds(-1)
+}
