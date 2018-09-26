@@ -49,6 +49,21 @@ $settings = New-ScheduledTaskSettingsSet -MultipleInstances IgnoreNew
 
 Register-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -Action $action -Trigger $trigger -Settings $settings -Principal $principal
 
+
+# Script zum Einrichten des DailyReports
+$ScriptToRun = "C:\DacSteriLog\DailyReport.PS1"
+$TaskName = "DacSteriDailyReport"
+$TaskPath = "\MyTasks\Aufgaben"
+
+$action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument "-NoProfile -WindowStyle Hidden -File $ScriptToRun"
+$trigger = New-ScheduledTaskTrigger -Daily -At "00:10"
+# damit LocalService die Datei schreiben darf, muss LocalService Schreibrechte bekommen!
+$principal = New-ScheduledTaskPrincipal -UserId "LOCALSERVICE" -LogonType ServiceAccount #-RunLevel Highest
+$settings = New-ScheduledTaskSettingsSet -MultipleInstances IgnoreNew
+
+Register-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -Action $action -Trigger $trigger -Settings $settings -Principal $principal
+
+
 # Aufgabenplanung öffnen, hier kann man den angelegte Task finden
 control schedtasks
 
