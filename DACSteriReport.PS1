@@ -46,8 +46,13 @@ Function Get-Week {
 Function Get-StartOfDay {
     [CmdletBinding()]
     Param(
-        [DateTime]$Date=(Get-Date)
+        [DateTime]$Date=(Get-Date),
+        [Switch]$Yesterday
     )
+
+    If ($Yesterday) {
+        $Date = $Date.AddDays(-1)
+    }
 
     $Date.Date
 }
@@ -56,8 +61,13 @@ Function Get-StartOfDay {
 Function Get-EndOfDay {
     [CmdletBinding()]
     Param(
-        [DateTime]$Date=(Get-Date)
+        [DateTime]$Date=(Get-Date),
+        [Switch]$Yesterday
     )
+
+    If ($Yesterday) {
+        $Date = $Date.AddDays(-1)
+    }
 
     $Date.Date.AddDays(1).AddMilliseconds(-1)
 }
