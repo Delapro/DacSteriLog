@@ -106,19 +106,20 @@ Drücken Sie zum Zurücksetzen die „Clear“-Taste und starten Sie den
 DAC UNIVERSAL erneut.
 Wenn der Fehler wiederholt auftritt, wenden Sie sich bitte an Ihren
 autorisierten Händler.
-75 Beim Aufheizen zur Sterilisation
-von 120°C auf 134°C wurden 2,5
-Minuten überschritten.
-Erhöhen Sie die Stufe der „Umgebungstemperatur-Empfindlichkeit“
-Einstellungen.
-Wenn der Wasserstand zu niedrig ist, füllen Sie demineralisiertes oder
-destilliertes Wasser (Wasserleitfähigkeit < 3,0 µS/cm) in den Wassertank.
-Wenn sich der DAC UNIVERSAL in einem Raum mit < 16°C befindet,
-heizen Sie den Raum auf Raumtemperatur.
-Drücken Sie zum Zurücksetzen die „Clear“-Taste und starten Sie den
-DAC UNIVERSAL erneut.
-Wenn der Fehler wiederholt auftritt, wenden Sie sich bitte an Ihren
-autorisierten Händler.
+#>
+
+$FehlerBeschreibungen += New-Fehlerbeschreibung -CodeNr 75 -Beschreibung @"
+Beim Aufheizen zur Sterilisation von 120°C auf 134°C wurden 2,5 Minuten überschritten.
+"@ -Fehlerbehebung @"
+Erhöhen Sie die Stufe der „Umgebungstemperatur-Empfindlichkeit“ Einstellungen.
+Wenn der Wasserstand zu niedrig ist, füllen Sie demineralisiertes oder destilliertes Wasser (Wasserleitfähigkeit < 3,0 µS/cm) in den Wassertank.
+Wenn sich der DAC UNIVERSAL in einem Raum mit < 16°C befindet, heizen Sie den Raum auf Raumtemperatur.
+Drücken Sie zum Zurücksetzen die „Clear“-Taste und starten Sie den DAC UNIVERSAL erneut.
+Wenn der Fehler wiederholt auftritt, wenden Sie sich bitte an Ihren autorisierten Händler.
+"@
+
+
+<#
 76 Ventilfehler Wenden Sie sich bitte an Ihren autorisierten Händler.
 77 Ventilfehler Wenden Sie sich bitte an Ihren autorisierten Händler.
 78 Ventilfehler Wenden Sie sich bitte an Ihren autorisierten Händler.
