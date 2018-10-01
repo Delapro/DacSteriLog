@@ -71,3 +71,74 @@ Function Get-EndOfDay {
 
     $Date.Date.AddDays(1).AddMilliseconds(-1)
 }
+
+# ermittelt Daten die zwischen zwei Wochentagen mit bestimmter Uhrzeit liegen
+Function Test-BetweenWeekdays {
+    [CmdletBinding()]
+    Param(
+        [Parameter(ParameterSetName="DatumString")]
+        [Parameter(ParameterSetName="DatumDate")]
+        [DateTime]$Datum,
+        #[Parameter(ParameterSetName="DatumString")][System.DayOfWeek]$VonWochentag,
+        [Parameter(ParameterSetName="DatumString")][ValidateSet('Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag')]
+        [String]$VonWochentag,
+        [Parameter(ParameterSetName="DatumString")][ValidatePattern("^(([01][0-9])|2[0-3]):[0-5][0-9]")]
+        [String]$VonUhrzeit,
+        #Parameter(ParameterSetName="DatumString")][System.DayOfWeek]
+        [Parameter(ParameterSetName="DatumString")][ValidateSet('Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag')]
+        [String]$BisWochentag,
+        [Parameter(ParameterSetName="DatumString")][ValidatePattern("^(([01][0-9])|2[0-3]):[0-5][0-9]")]
+        [String]$BisUhrzeit,
+        [Parameter(ParameterSetName="DatumDate")][DateTime]$Wochenanfang,
+        [Parameter(ParameterSetName="DatumDate")][DateTime]$Wochenende
+    )
+
+    If ($PSCmdlet.ParameterSetName -eq "DatumDate") {
+        $VonWochentag = [System.Globalization.CultureInfo]::CurrentUICulture.DateTimeFormat.GetDayName($Wochenanfang.DayOfWeek)
+        $VonUhrzeit = $Wochenanfang.TimeOfDay.ToString()
+        $BisWochentag = [System.Globalization.CultureInfo]::CurrentUICulture.DateTimeFormat.GetDayName($Wochenende.DayOfWeek)
+        $BisUhrzeit = $Wochenende.TimeOfDay.ToString()
+    }
+
+    $DatumWochentag = [System.Globalization.CultureInfo]::CurrentUICulture.DateTimeFormat.GetDayName($Datum.DayOfWeek)
+    $DatumUhrzeit = $Datum.TimeOfDay.ToString()
+
+    $von = (Get-DayOfWeek $VonWochentag).value__ * [TimeSpan]::TicksPerDay + ([TimeSpan]$VonUhrzeit).Ticks
+    $bis = (Get-DayOfWeek $BisWochentag).value__ * [TimeSpan]::TicksPerDay + ([TimeSpan]$BisUhrzeit).Ticks
+    $now = (Get-DayOfWeek $DatumWochentag).value__ * [TimeSpan]::TicksPerDay + ([TimeSpan]$DatumUhrzeit).Ticks
+
+    Write-Verbose "$von <= $now <= $bis"
+
+    $von -le $now -and $now -le $bis
+}
+
+# Konvertiert einen deutschen Wochentag in die englische Invariant-Variante
+Function Convert-WochentagToInvariant {
+    [CmdletBinding()]
+    Param(
+        [ValidateSet('Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag')]
+        $Wochentag
+    )
+
+    switch ($Wochentag) {
+        'Montag'        {'Monday'}
+        'Dienstag'      {'Tuesday'}
+        'Mittwoch'      {'Wednesday'}
+        'Donnerstag'    {'Thursday'}
+        'Freitag'       {'Friday'}
+        'Samstag'       {'Saturday'}
+        'Sonntag'       {'Sunday'}
+    }
+
+}
+
+# Ermittelt zum übergebenen deutschen Wochentag die zugehörige System-Enum-Variante
+Function Get-DayOfWeek{
+    [CmdletBinding()]
+    Param(
+        [ValidateSet('Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag')]
+        $Wochentag
+    )
+
+    [System.DayOfWeek][System.Enum]::Parse([System.DayOfWeek], (Convert-WochentagToInvariant $Wochentag), $true)
+}
