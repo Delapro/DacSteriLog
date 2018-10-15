@@ -9,6 +9,7 @@ Zunächst muss man die Scripte laden, da es noch kein vollständiges Modul gibt.
 ```Powershell
 . .\DacSteriAnalyse.PS1
 . .\DacSteriLogger.PS1
+. .\DacSteriReport.PS1
 . .\Fehlernummern.PS1
 . .\MelaViewProvider.PS1
 # zur Diagnose bestehender LOG-Dateien
