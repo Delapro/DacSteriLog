@@ -73,8 +73,8 @@ $z | where {$_.Wochentag -eq "Montag" -and (NachUhrzeit $_.Beginn "16:00") -and 
 
 # Vergleichbare Zyklen im Zeitraum zwischen den Problemzyklen ermitteln
 # hier wird nur $p[0] beachtet, die weiteren Elemente sollte auch bearbeitet werden
-$beginn = ($az | where Zyklus -eq $p[0].VonZyklus).Ende
-$ende = ($az | where Zyklus -eq $p[0].BisZyklus).Beginn
+$beginn = ($z | where Zyklus -in $p[0].VonZyklus).Ende
+$ende = ($z | where Zyklus -in $p[0].BisZyklus).Beginn
 $zv = $az | where {-not $_.Fehlerhaft -and (Test-BetweenWeekDays -Datum $_.Beginn -Wochenanfang $beginn -Wochenende $ende)}
 # TODO: Auswahl darstellen, ein Element wählen und das Datum und die Zyklennummre anpassen
 
