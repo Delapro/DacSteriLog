@@ -78,6 +78,11 @@ $ende = ($z | where Zyklus -in $p[0].BisZyklus).Beginn
 $zv = $az | where {-not $_.Fehlerhaft -and (Test-BetweenWeekDays -Datum $_.Beginn -Wochenanfang $beginn -Wochenende $ende)}
 # TODO: Auswahl darstellen, ein Element wählen und das Datum und die Zyklennummre anpassen
 
+# weitere Tests durchführen mit neuem Einsprung passend zum letzten Abbruch
+$e=Get-ElementFromZyklus -Zyklen $z -Zyklus $p[0].BisZyklus
+$tz = $z[$e..($z.Length)]
+$p=Test-DacZyklenChronologie -Zyklen $tz -Verbose -PassThru
+
 # sollten verschiedene LOG-Dateien zusammengespielt werden, so müssen diese sortiert werden
 $kombination = $z + $nz
 $kombination = $kombination | sort Zyklus
