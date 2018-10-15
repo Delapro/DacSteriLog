@@ -90,6 +90,8 @@ Test-DACZyklenChronologie -Zyklen $kombination -Verbose -Continue
 
 # Wenn Test-DACZyklenChronologie $true meldet, kann man die Daten im Melag speichern
 # man könnte davor noch das $basePath-Verzeichnis wegkopieren
+# der erste Eintrag sollte übersprungen werden, da es der letzte bereits bestehende Zyklus ist!!
+$tz = $z[($e+1)..($z.Length)]
 Write-DACLogFile -BasePath $basePath -Device DAC01 -Zyklus $tz -Verbose
                                                    # sollte Zyklen heißen!
 ```
