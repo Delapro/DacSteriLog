@@ -1,0 +1,27 @@
+ #DAC Universal                   
+Serien Nr:  601362
+Programm:   Universal/134?C/3min
+Deckel:     Standard            
+Zyklus:     1100
+Dat.(T-M-J) 29-10-2018
+Zeit(H-M-S) 16:02:53
+--------------------------------
+Phase:             Uhrzeit: Erg:
+Start              16:02:54 FEHL
+Error code   81
+
+Prozessende        16:03:00 FEHL
+Bestaetigung       16:03:01 FEHL
+--------------------------------
+Zyklusende         16:03:01 FEHL
+--------------------------------
+
+
+            Fehler!
+
+Error code   81
+
+Abbruch Sterilisation
+
+
+
