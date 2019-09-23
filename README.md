@@ -65,6 +65,15 @@ $azd = $az | where {$_.Wochentag -eq "Dienstag" -and $_.Fehlerhaft -eq $false}
 # sucht man einen Eintrag an einem bestimmten Wochentag der zwischen 11:30 Uhr und  17 Uhr lief:
 $azd = $az | where {$_.Wochentag -eq "Dienstag" -and (NachUhrzeit $_.Beginn "11:30") -and (VorUhrzeit $_.Ende "16:59")  -and $_.Fehlerhaft -eq $false}
 
+# um nach bestimmten Tagen mit einer bestimmten Anzahl von Zyklen suchen zu können, gruppiert
+# man diese, dazu muss aber das Datum von der Uhrzeiten extra gelöst werden:
+$azg = $az | Select @{N="Datum";E={(Get-Date $_.Beginn).Date}}, * | group Datum
+# dann sucht man die Tage mit der gewünschten Anzahl von Zyklen und dem gewünschten Wochentag
+# hier 3 Zyklen und Montag
+$raz = $azg | where Count -eq 3 | where {($_.Group).Wochentag -eq "Montag"}
+# nun sollte man sich für einen Eintrag entscheiden
+$razr = $raz | select @{N="Von";E={($_.Group)[0].Beginn}}, @{N="Bis";E={($_.Group)[-1].Ende}}, * | out-gridView -PassThru
+
 # zur schnelleren Analyse kann man auch PassThru verwenden:
 $p=Test-DacZyklenChronologie -Zyklen $z -verbose -PassThru
 $z | where Zyklus -In ($p.VonZyklus,$p.BisZyklus)| select Zyklus, Wochentag, Beginn, Ende| ft -AutoSize
