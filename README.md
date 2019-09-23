@@ -76,7 +76,7 @@ $z | where {$_.Wochentag -eq "Montag" -and (NachUhrzeit $_.Beginn "16:00") -and 
 $beginn = ($z | where Zyklus -in $p[0].VonZyklus).Ende
 $ende = ($z | where Zyklus -in $p[0].BisZyklus).Beginn
 $zv = $az | where {-not $_.Fehlerhaft -and (Test-BetweenWeekDays -Datum $_.Beginn -Wochenanfang $beginn -Wochenende $ende)}
-# TODO: Auswahl darstellen, ein Element wählen und das Datum und die Zyklennummre anpassen
+# TODO: Auswahl darstellen, ein Element wählen und das Datum und die Zyklennummer anpassen
 
 # weitere Tests durchführen mit neuem Einsprung passend zum letzten Abbruch
 $e=Get-ElementFromZyklus -Zyklen $z -Zyklus $p[0].BisZyklus
