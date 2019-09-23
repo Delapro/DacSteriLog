@@ -307,9 +307,9 @@ Function Get-DACBlockPos {
                 } else {
                     # nach Fehlerzyklus ende erkennen
                     while ($Index -lt $log.Length -and ($Zeile -notmatch "DAC Universal") -and ($Zeile -notmatch "===----") ) {
-                        $Zeile = $Log[$Index++]
+                        $Zeile = $Log[++$Index]
                     }
-                    $end = $Index
+                    $end = --$Index
                 }
             }
         }
