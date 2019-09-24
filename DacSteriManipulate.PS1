@@ -58,3 +58,30 @@ Function Clone-DACZyklus {
 
     $DACZyklus
 }
+
+Function Clone-DACZyklen {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "", Scope="Function")]
+    [CmdletBinding()]
+    Param (
+        [PSTypeName('DAC.Zyklus')]$Zyklen,
+        [DateTime]$NewDate,
+        [System.Int32]$NewZyklus,
+        [System.String]$NewSerialNumber
+    )
+
+    If ($null -ne $NewZyklus) {
+        $StartZyklus = $NewZyklus
+    }
+
+    $Clone = @()
+    foreach ($Zyklus in $Zyklen) {
+        If ($null -eq $StartZyklus) {
+            $Clone += Clone-DACZyklus -Zyklus $Zyklus -NewDate $NewDate -NewSerialNumber $NewSerialNumber
+        } else {
+            $Clone += Clone-DACZyklus -Zyklus $Zyklus -NewDate $NewDate -NewZyklus $NewZyklus -NewSerialNumber $NewSerialNumber
+            $NewZyklus++
+        }
+    }
+
+    $Clone
+}
