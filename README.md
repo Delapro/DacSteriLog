@@ -10,6 +10,7 @@ Zunächst muss man die Scripte laden, da es noch kein vollständiges Modul gibt.
 . .\DacSteriAnalyse.PS1
 . .\DacSteriLogger.PS1
 . .\DacSteriReport.PS1
+. .\DacSteriManipulate.PS1
 . .\Fehlernummern.PS1
 . .\MelaViewProvider.PS1
 # zur Diagnose bestehender LOG-Dateien
@@ -73,6 +74,10 @@ $azg = $az | Select @{N="Datum";E={(Get-Date $_.Beginn).Date}}, * | group Datum
 $raz = $azg | where Count -eq 3 | where {($_.Group).Wochentag -eq "Montag"}
 # nun sollte man sich für einen Eintrag entscheiden
 $razr = $raz | select @{N="Von";E={($_.Group)[0].Beginn}}, @{N="Bis";E={($_.Group)[-1].Ende}}, * | out-gridView -PassThru
+
+# um einen Zyklus zu klonen mit gleichzeitiger Manipulation gängiger Werte:
+# werden die New-Parameter nicht angegeben, wird der Zyklus direkt geklont
+$zn = Clone-DACZyklus -Zyklus $z[0] -NewDate (Get-Date) -NewZyklus 9999 -NewSerialNumber 632547
 
 # zur schnelleren Analyse kann man auch PassThru verwenden:
 $p=Test-DacZyklenChronologie -Zyklen $z -verbose -PassThru
