@@ -112,6 +112,8 @@ Write-DACLogFile -BasePath $basePath -Device DAC01 -Zyklus $tz -Verbose
 
 # noch ein weiterer Sonderfall, man hat eine Liste von Zyklennummern und Daten aus einer 
 # CSV-Datei, woraus nun komplette Zyklen nachgebaut werden sollen
+# Struktur der CSV: Nummer, Datum, Uhrzeit, Fehler
+# Uhrzeit und Fehler sollten als Spalten definiert sein, werden aber momentan noch nicht beachtet!
 $fehl=Import-Csv '.\VorgabeZyklenMitDatum.csv' -Delimiter ';'
 # Datumfeld muss von String in DateTime gewandelt werden
 $fehl = $fehl| select Nummer, @{N='Datum';E={Get-Date ($_.Datum)}}, Uhrzeit, Fehler
