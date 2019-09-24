@@ -108,4 +108,36 @@ Test-DACZyklenChronologie -Zyklen $kombination -Verbose -Continue
 $tz = $z[($e+1)..($z.Length)]
 Write-DACLogFile -BasePath $basePath -Device DAC01 -Zyklus $tz -Verbose
                                                    # sollte Zyklen heißen!
+
+
+# noch ein weiterer Sonderfall, man hat eine Liste von Zyklennummern und Daten aus einer 
+# CSV-Datei, woraus nun komplette Zyklen nachgebaut werden sollen
+$fehl=Import-Csv '.\VorgabeZyklenMitDatum.csv' -Delimiter ';'
+# Datumfeld muss von String in DateTime gewandelt werden
+$fehl = $fehl| select Nummer, @{N='Datum';E={Get-Date ($_.Datum)}}, Uhrzeit, Fehler
+# Skip 1 für leere Felder, muss nicht sein, wenn CSV-Datei komplett ausgefüllt ist
+$fehlg = $fehl| sort nummer | group Datum| select -skip 1
+# für bestimmte Aktionen macht es Sinn die gruppierten Zyklen nach Zyklen pro Tag abzulegen
+$azg1 = $azg | where Count -eq 1
+$azg2 = $azg | where Count -eq 2
+$azg3 = $azg | where Count -eq 3
+$azg4 = $azg | where Count -eq 4
+$azg5 = $azg | where Count -eq 5
+$fehlNeu = $fehlg | % {$RZyklen = $null; switch ($_.Count) {
+        1   {$RZyklen = ($azg1 | Get-Random).Group}
+        2   {$RZyklen = ($azg2 | Get-Random).Group}
+        3   {$RZyklen = ($azg3 | Get-Random).Group}
+        4   {$RZyklen = ($azg4 | Get-Random).Group}
+        5   {$RZyklen = ($azg5 | Get-Random).Group}
+        default {Write-Error 'nicht definiert! Bitte $azgX definieren'}
+    }
+    If ($RZyklen.Count -gt 0) {
+        Clone-DacZyklen -Zyklen $RZyklen -NewDate $_.Group[0].Datum -NewZyklus $_.Group[0].Nummer
+    } else {
+        Clone-DacZyklus -Zyklus $RZyklen -NewDate $_.Group[0].Datum -NewZyklus $_.Group[0].Nummer
+    }
+}
+# an diesem Punkt kann man nochmal einen Quercheck machen
+Test-DACZyklenChronologie $fehlNeu -Continue -Verbose
+
 ```

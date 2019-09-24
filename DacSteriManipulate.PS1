@@ -6,7 +6,8 @@ Function Clone-DACZyklus {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "", Scope="Function")]
     [CmdletBinding()]
     Param (
-        [PSTypeName('DAC.Zyklus')]$Zyklus,
+        # [PSTypeName('DAC.Zyklus')]
+        $Zyklus,
         [DateTime]$NewDate,
         [System.Int32]$NewZyklus,
         [System.String]$NewSerialNumber
@@ -63,7 +64,8 @@ Function Clone-DACZyklen {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "", Scope="Function")]
     [CmdletBinding()]
     Param (
-        [PSTypeName('DAC.Zyklus')]$Zyklen,
+        # [PSTypeName('DAC.Zyklus')]
+        $Zyklen,
         [DateTime]$NewDate,
         [System.Int32]$NewZyklus,
         [System.String]$NewSerialNumber
