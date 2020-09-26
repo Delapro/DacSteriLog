@@ -113,11 +113,14 @@ Write-DACLogFile -BasePath $basePath -Device DAC01 -Zyklus $tz -Verbose
 # noch ein weiterer Sonderfall, man hat eine Liste von Zyklennummern und Daten aus einer 
 # CSV-Datei, woraus nun komplette Zyklen nachgebaut werden sollen
 # Struktur der CSV: Nummer, Datum, Uhrzeit, Fehler
+# neue Struktur der CSV: Nummer, Datum, AbUhrzeit, BisUhrzeit, Fehler
 # Uhrzeit und Fehler sollten als Spalten definiert sein, werden aber momentan noch nicht beachtet!
 $fehl=Import-Csv '.\VorgabeZyklenMitDatum.csv' -Delimiter ';'
 # Datumfeld muss von String in DateTime gewandelt werden
 $fehl = $fehl| select Nummer, @{N='Datum';E={Get-Date ($_.Datum)}}, Uhrzeit, Fehler
-# Skip 1 für leere Felder, muss nicht sein, wenn CSV-Datei komplett ausgefüllt ist
+# $fehl = $fehl| select Nummer, @{N='Datum';E={Get-Date ($_.Datum)}}, AbUhrzeit, BisUhrzeit, Fehler
+# wenn leere Felder vorhanden sind, diese ignorieren
+Skip 1 für leere Felder, muss nicht sein, wenn CSV-Datei komplett ausgefüllt ist
 $fehlg = $fehl| sort nummer | group Datum| select -skip 1
 # für bestimmte Aktionen macht es Sinn die gruppierten Zyklen nach Zyklen pro Tag abzulegen
 $azg1 = $azg | where Count -eq 1
@@ -141,6 +144,11 @@ $fehlNeu = $fehlg | % {$RZyklen = $null; switch ($_.Count) {
 }
 # an diesem Punkt kann man nochmal einen Quercheck machen
 Test-DACZyklenChronologie $fehlNeu -Continue -Verbose
+# was obigen Routinen noch fehlt sind Ab/Bis Uhrzeiten, dadurch gibt es manchmal Überscheidungen
+# welche Datumsinkonsitenzfehler nach sich ziehen können, der beste Weg diese momentan zu beheben, ist,
+# die erzeugten Daten in eine LOG-Datei zu schreiben und diese manuell zu bearbeiten.
+# ($fehlneu).RawContent | Send-Content Fehlerhaft.log
+# ebenso fehlt noch die Unterstüzung der Fehlerursachen!
 
 # um einen Eintrag zu klonen und in der Windowszwischenablage in RawFormat zur Verfügung stellen:
 Clone-DACZyklus -Zyklus $azd[0] -NewDate (Get-Date 15.10.2018) | select -ExpandProperty rawcontent | clip
