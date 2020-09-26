@@ -35,6 +35,10 @@ Function Clone-DACZyklus {
     $OldSerialNumber = $Zyklus.Seriennummer
     If ($null -eq $NewSerialNumber) {
         $NewSerialNumber = $Zyklus.Seriennummer
+    } else {
+        If ($NewSerialNumber.Length -eq 0) {
+            $NewSerialNumber = $Zyklus.Seriennummer
+        }
     }
 
     $DACZyklus = [PSCustomObject]@{
