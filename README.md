@@ -142,4 +142,7 @@ $fehlNeu = $fehlg | % {$RZyklen = $null; switch ($_.Count) {
 # an diesem Punkt kann man nochmal einen Quercheck machen
 Test-DACZyklenChronologie $fehlNeu -Continue -Verbose
 
+# um einen Eintrag zu klonen und in der Windowszwischenablage in RawFormat zur Verfügung stellen:
+Clone-DACZyklus -Zyklus $azd[0] -NewDate (Get-Date 15.10.2018) | select -ExpandProperty rawcontent | clip
+
 ```

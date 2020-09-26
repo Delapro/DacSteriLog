@@ -43,6 +43,7 @@ Function Test-Zyklen {
     )
     
     $z = Get-AllZyklen -BaseDir $BaseDir -LogFileExtension $LogFileExtension
+    # TODO
 }
 
 <#
@@ -58,10 +59,7 @@ Function Get-AllZyklen {
     
     $Files = Get-LogFiles -BaseDir $BaseDir -LogFileExtension $LogFileExtension
     Write-Verbose "$($Files.Length)-Dateien ermittelt"
-    $TempFile = New-LogFile -File $Files 
-    Write-Verbose "Temporäre Logdatei: $TempFile"
-    $z = Analyze-DACLogFile -Path $TempFile
-    $z
+    $Files | ForEach-Object {Analyze-DACZyklus (Get-Content $_.Fullname)}
 }
 
 # gibt die Zyklen in einer Gridview aus
