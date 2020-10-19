@@ -15,6 +15,7 @@ Zunächst muss man die Scripte laden, da es noch kein vollständiges Modul gibt.
 . .\MelaViewProvider.PS1
 # zur Diagnose bestehender LOG-Dateien
 . .\Util\Check.PS1
+. .\Util\Edit.PS1
 ```
 
 ## Anwendung
