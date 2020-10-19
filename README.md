@@ -159,4 +159,10 @@ Clone-DACZyklus -Zyklus $azd[0] -NewDate (Get-Date 15.10.2018) | select -ExpandP
 # Fehlerbeschreibung zu einem Fehlercode ermitteln
 $FehlerBeschreibungen|where CodeNr -eq 86|select Beschreibung | ft -Wrap
 
+
+# Statistik
+
+# Dauer des längsten Zyklus ermitteln
+$az|measure -Maximum -Property Dauer
+
 ```
