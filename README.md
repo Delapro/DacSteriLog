@@ -155,4 +155,8 @@ Test-DACZyklenChronologie $fehlNeu -Continue -Verbose
 # um einen Eintrag zu klonen und in der Windowszwischenablage in RawFormat zur Verfügung stellen:
 Clone-DACZyklus -Zyklus $azd[0] -NewDate (Get-Date 15.10.2018) | select -ExpandProperty rawcontent | clip
 
+
+# Fehlerbeschreibung zu einem Fehlercode ermitteln
+$FehlerBeschreibungen|where CodeNr -eq 86|select Beschreibung | ft -Wrap
+
 ```
