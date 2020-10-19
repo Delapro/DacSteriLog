@@ -11,8 +11,9 @@ Zunächst muss man die Scripte laden, da es noch kein vollständiges Modul gibt.
 . .\DacSteriLogger.PS1
 . .\DacSteriReport.PS1
 . .\DacSteriManipulate.PS1
-. .\Fehlernummern.PS1
 . .\MelaViewProvider.PS1
+# Fehlernummern per UTF-8 Encoding laden
+$ExecutionContext.InvokeCommand.InvokeScript($false,([scriptblock]::Create([system.io.file]::ReadAllText((Join-Path (Resolve-Path .) ".\Fehlernummern.PS1"),[System.Text.Encoding]::UTF8))),$null,$null)
 # zur Diagnose bestehender LOG-Dateien
 . .\Util\Check.PS1
 . .\Util\Edit.PS1
