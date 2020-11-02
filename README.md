@@ -156,6 +156,9 @@ Test-DACZyklenChronologie $fehlNeu -Continue -Verbose
 Clone-DACZyklus -Zyklus $azd[0] -NewDate (Get-Date 15.10.2018) | select -ExpandProperty rawcontent | clip
 
 
+# Fehlerbeschreibungen korrekt einlesen, wegen Umlauten
+$ExecutionContext.InvokeCommand.InvokeScript($false,([scriptblock]::Create([system.io.file]::ReadAllText((Join-Path (Resolve-Path .) ".\Fehlernummern.PS1"),[System.Text.Encoding]::UTF8))),$null,$null)
+
 # Fehlerbeschreibung zu einem Fehlercode ermitteln
 $FehlerBeschreibungen|where CodeNr -eq 86|select Beschreibung | ft -Wrap
 
