@@ -154,17 +154,83 @@ Test-DACZyklenChronologie $fehlNeu -Continue -Verbose
 
 # um einen Eintrag zu klonen und in der Windowszwischenablage in RawFormat zur Verfügung stellen:
 Clone-DACZyklus -Zyklus $azd[0] -NewDate (Get-Date 15.10.2018) | select -ExpandProperty rawcontent | clip
+```
 
+## einen fehlenden Zyklus ausgleichen
 
+```Powershell
+$az = Get-AllZyklen $basePath
+$az = $az | sort Zyklus
+
+$azd = $az | where {$_.Wochentag -eq "Donnerstag" -and (NachUhrzeit $_.Beginn "14:30") -and (VorUhrzeit $_.Ende "19:00")  -and $_.Fehlerhaft -eq $false}
+
+# einen Treffer rauspicken
+$zz=$azd|Get-Random
+
+$fehlneu =Clone-DACZyklus $zz -NewDate (get-Date 15.10.2020) -NewZyklus 1987
+Test-DACZyklenChronologie $fehlNeu -Continue -Verbose
+
+# ein einzelner Zyklus muss in Array konvertiert werden!
+Write-DACLogFile -BasePath $basePath -Device DAC01 -Zyklus @($fehlneu) -Verbose
+
+# nochmal Testen
+# bestehende LOG-Dateien einlesen
+$az = Get-AllZyklen $basePath
+
+# zur Sicherheit sollten die Zyklen sortiert werden
+$az = $az | sort Zyklus
+
+Test-DacZyklenChronologie -Zyklen $az -verbose -Continue
+
+# WICHTIG: fehlender Zyklus sollte in SteriProtokolloger abgespeichert werden!!
+
+```
+
+## mehrere fehlende Zyklen ausgleichen
+```Powershell
+$az = Get-AllZyklen $basePath
+# zur Sicherheit sollten die Zyklen sortiert werden
+$az = $az | sort Zyklus
+$azg = $az | Select @{N="Datum";E={(Get-Date $_.Beginn).Date}}, * | group Datum
+# prüfen, ob es passt:
+$azg4 = $azg | where Count -eq 4 | where {NachUhrzeit $_.Group[0].Beginn "10:50"}| where {$_.Group[0].Fehlerhaft -eq $false}
+$azg4.Length
+$RZyklen = ($azg4 | Get-Random).Group
+
+# Sichtprüfung, ob es passt
+$RZyklen|Out-GridView
+
+# es wird nur das Datum und der Startzyklus angegeben
+$fehlNeu = Clone-DacZyklen -Zyklen $RZyklen -NewDate (Get-Date 29.10.2020) -NewZyklus 2012
+$fehlNeu|Out-GridView
+Test-DACZyklenChronologie $fehlNeu -Continue -Verbose
+Write-DACLogFile -BasePath $basePath -Device DAC01 -Zyklus $fehlNeu -Verbose
+
+# nochmal Gegencheck
+$az = Get-AllZyklen $basePath
+# zur Sicherheit sollten die Zyklen sortiert werden
+$az = $az | sort Zyklus
+Test-DacZyklenChronologie -Zyklen $az -verbose -Continue
+
+# wichtig!!
+# die fehlenden Zyklen müssen noch in SteriProtokolllogger.log-Datei eingefügt werden!
+
+```
+
+## Fehlercodes
+
+```Powershell
 # Fehlerbeschreibungen korrekt einlesen, wegen Umlauten
 $ExecutionContext.InvokeCommand.InvokeScript($false,([scriptblock]::Create([system.io.file]::ReadAllText((Join-Path (Resolve-Path .) ".\Fehlernummern.PS1"),[System.Text.Encoding]::UTF8))),$null,$null)
 
 # Fehlerbeschreibung zu einem Fehlercode ermitteln
 $FehlerBeschreibungen|where CodeNr -eq 86|select Beschreibung | ft -Wrap
 
+```
 
-# Statistik
+## Statistik
 
+```Powershell
 # Dauer des längsten Zyklus ermitteln
 $az|measure -Maximum -Property Dauer
 
