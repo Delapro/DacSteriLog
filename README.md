@@ -256,4 +256,18 @@ $azff|where {$_.Beginn.TimeOfDay -eq $mm.Minimum}
 $azff|where {$_.Beginn.TimeOfDay -eq $mm.Maximum}
 # oder manuell:
 $azff|where {$_.Ende.TimeOfDay -eq [TimeSpan]'10:13:00'}
+
+# Maschinenlaufzeiten ermitteln 
+$av=$azff|select @{N='DauerTS';E={$_.Dauer.TotalSeconds}}| measure -Minimum -Maximum -average -Sum -Property DauerTS
+$av
+function Ts2Time ($TotalSeconds) {[TimeSpan]::New($TotalSeconds*1000*10000).toString()}
+# durchschnittliche Laufzeit pro Zyklus
+Ts2Time $av.Average
+# schnellste Laufzeit
+Ts2Time $av.Minimum
+# längste Laufzeit
+Ts2Time $av.Maximum
+# Laufzeit insgesamt
+Ts2Time $av.Sum
+
 ```
