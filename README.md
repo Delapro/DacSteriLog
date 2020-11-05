@@ -183,6 +183,7 @@ $az = $az | sort Zyklus
 Test-DacZyklenChronologie -Zyklen $az -verbose -Continue
 
 # WICHTIG: fehlender Zyklus sollte in SteriProtokolloger abgespeichert werden!!
+($fehlneu).RawContent | clip
 
 ```
 
@@ -214,6 +215,7 @@ Test-DacZyklenChronologie -Zyklen $az -verbose -Continue
 
 # wichtig!!
 # die fehlenden Zyklen müssen noch in SteriProtokolllogger.log-Datei eingefügt werden!
+($fehlneu).RawContent | clip
 
 ```
 
@@ -231,7 +233,27 @@ $FehlerBeschreibungen|where CodeNr -eq 86|select Beschreibung | ft -Wrap
 ## Statistik
 
 ```Powershell
-# Dauer des längsten Zyklus ermitteln
-$az|measure -Maximum -Property Dauer
+# fehlerhafte Zyklen entfernen
+$azff = $az | where fehlerhaft -eq $false
 
+# Dauer des längsten und kürzesten Zyklus ermitteln
+$azff|measure -Minimum -Maximum -Property Dauer
+
+# Zeitpunkt des frühesten und spätesten Start ermitteln
+$mm = $azff|select @{N='Startzeit';E={$_.Beginn.TimeOfDay}}| measure -Minimum -Maximum -Property Startzeit
+$mm
+# möchte man dazu den passenden Zyklus ermitteln:
+$azff|where {$_.Beginn.TimeOfDay -eq $mm.Minimum}
+$azff|where {$_.Beginn.TimeOfDay -eq $mm.Maximum}
+# oder manuell:
+$azff|where {$_.Beginn.TimeOfDay -eq [TimeSpan]'10:13:00'}
+
+# Zeitpunkt des frühesten und spätesten Ende ermitteln
+$mm=$azff|select @{N='Endzeit';E={$_.Ende.TimeOfDay}}| measure -Minimum -Maximum -Property Endzeit
+$mm
+# möchte man dazu den passenden Zyklus ermitteln:
+$azff|where {$_.Beginn.TimeOfDay -eq $mm.Minimum}
+$azff|where {$_.Beginn.TimeOfDay -eq $mm.Maximum}
+# oder manuell:
+$azff|where {$_.Ende.TimeOfDay -eq [TimeSpan]'10:13:00'}
 ```
