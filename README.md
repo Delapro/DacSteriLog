@@ -147,7 +147,7 @@ $fehlNeu = $fehlg | % {$RZyklen = $null; switch ($_.Count) {
 # an diesem Punkt kann man nochmal einen Quercheck machen
 Test-DACZyklenChronologie $fehlNeu -Continue -Verbose
 # was obigen Routinen noch fehlt sind Ab/Bis Uhrzeiten, dadurch gibt es manchmal Überscheidungen
-# welche Datumsinkonsitenzfehler nach sich ziehen können, der beste Weg diese momentan zu beheben, ist,
+# welche Datumsinkonsistenzfehler nach sich ziehen können, der beste Weg diese momentan zu beheben, ist,
 # die erzeugten Daten in eine LOG-Datei zu schreiben und diese manuell zu bearbeiten.
 # ($fehlneu).RawContent | Send-Content Fehlerhaft.log
 # ebenso fehlt noch die Unterstüzung der Fehlerursachen!
