@@ -26,3 +26,22 @@ Function Edit-DACLogFile {
     }
 }
 
+# liest einen Zyklus aus einer LOG-Datei (.PRO oder .STR), und schreibt dessen Ende-Datum als Zeitstempel der Datei
+Function Set-LastWriteTimeFromLogEntry {
+    [CmdletBinding()]
+    Param ([string]$path)
+  
+    $path = Resolve-Path $path
+    Write-Verbose $path
+  
+    If (Test-Path $path) {
+        $z = Analyze-DacLogFile -Path $path
+        If ($z) {
+            $FileMetaData = Get-ChildItem $path
+            $FileMetaData.LastWriteTime = $z.Ende
+            If ($z.Ende -eq ((Get-ChildItem $path).LastWriteTime)) {
+                Write-Verbose "Datum erfolgreich gesetzt auf $($z.Ende)"
+            }
+        }
+    }
+}
